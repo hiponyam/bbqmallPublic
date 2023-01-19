@@ -79,6 +79,11 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
 
 }
 
+.img > .image {
+    width: 18.75rem;
+    height: 18.25rem;
+}
+
 .product-container > .products:hover {
     font-weight:500;
 }

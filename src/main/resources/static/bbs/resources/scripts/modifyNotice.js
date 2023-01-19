@@ -266,4 +266,3 @@ if(window.document.getElementById('bidValue').value==="pr"){
     window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }
-

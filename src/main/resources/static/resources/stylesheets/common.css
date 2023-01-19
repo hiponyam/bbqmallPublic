@@ -908,6 +908,20 @@ body>main>.admin-side-bar{
 
 /*어드민 사이드바*/
 
+body>footer>nav{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+
+    justify-content: space-around;
+}
+body>footer>nav>a>img{
+    width: 5rem;
+    height: 5rem;
+}
+
 
 .--cover{
     top: 0;
@@ -1051,7 +1065,22 @@ body>main>.admin-side-bar{
         display: none;
     }
 
+
+
 }
+
+@media screen and (max-width : 60rem) {
+    body > footer > .foot-row > .last {
+        margin-bottom: 3.25rem;
+    }
+
+    body>footer>nav{
+        display: flex;
+    }
+
+}
+
+
 @media screen and (max-width : 53.75rem) {
     html{
         overflow-x: hidden;
@@ -1130,4 +1159,15 @@ body>main>.admin-side-bar{
     body>main{
         padding: 0;
     }
+}
+
+@media screen and (max-width : 60rem) {
+    body > footer > .foot-row > .last {
+        margin-bottom: 3.25rem;
+    }
+
+    body>footer>nav{
+        display: flex;
+    }
+
 }

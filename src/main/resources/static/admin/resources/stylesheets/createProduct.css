@@ -1,6 +1,6 @@
 
 body>main{
-
+    width: 80rem;
     display: flex;
     flex-direction: row;
     /*justify-content: flex-start;*/
@@ -304,7 +304,6 @@ body> main> .content > form >.button-row>label> .submit:hover{
     }
 
 }
-
 
 
 

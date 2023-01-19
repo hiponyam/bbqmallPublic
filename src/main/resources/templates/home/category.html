@@ -47,7 +47,10 @@
                             <div th:text = "${product.getProductIndex()}" hidden>3</div>
                             <div class="product-box">
                                 <a class = "title" th:href = "@{/view (pid = ${product.getProductIndex()})}"> <!-- 클릭시 이동할 view 주소 -->
-                                    <img src="/resources/images/new1.png" width="300px" alt>
+                                    <a th:href="@{view (pid=${product.getProductIndex()})}" class="img">
+                                        <!--                   <img th:each="image : ${product.getImageIndexes()}">-->
+                                        <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지" class="image">
+                                    </a>
                                     <div class = "comment" th:text = "${'[' + product.getProductName() + ']'}">내용</div>
                                     <span class="sale" th:text="${product.getSaleQuantity()}">13%</span>
                                     <span class="percent">%</span>

@@ -1,4 +1,6 @@
-
+body>main{
+    width: 80rem;
+}
 
 body>main>.content {
     width: 100%;
@@ -187,6 +189,5 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
 }
-
 
 
