@@ -46,4 +46,14 @@
 
     </select>
 
+    <select id="selectDetailImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`detail_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
 </mapper>

@@ -106,9 +106,9 @@ form.onsubmit = e =>{
                         alert('작성 성공');
                         if (bidValue==='pi'|| bidValue==='pr'){
 
-                            window.location.href = `http://localhost:8080/board/?bid=`+bidValue;
+                            window.location.href = `/board/?bid=`+bidValue;
                         }else {
-                            window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                            window.location.href = `/board/`;//자바스크립트문법
                         }
 
                         break;

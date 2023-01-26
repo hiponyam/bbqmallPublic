@@ -340,7 +340,7 @@ form['emailButton'].addEventListener('click', ()=>{
 
     else if(form.classList.contains('step3')){
 
-        window.location.href='http://localhost:8080/member/login';
+        window.location.href='/member/login';
 
      }
 

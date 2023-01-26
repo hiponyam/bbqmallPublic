@@ -45,8 +45,8 @@ body>main>.content>ul>li:last-of-type{
 body>main>.content>ul>li>a>i{
     font-size: 3rem;
     opacity: 80%;
-    max-width: 55px;
-    max-height:55px;
+    max-width: 3.4375rem;
+    max-height: 3.4375rem;
     padding: 2rem 0;
 }
 
@@ -61,7 +61,7 @@ body>main>.content>ul>li>a{
     flex-direction: column ;
     justify-content: flex-start;
 
-    font-size: 15px;
+    font-size: 0.9375rem;
     color: rgba(0,0,0,0.8);
 
 
@@ -71,8 +71,8 @@ body>main>.content>ul>li>a{
 
 body>main>.content>.lookup>.title-row{
 
-    margin-top: 62px;
-    padding-bottom: 14px;
+    margin-top: 3.875rem;
+    padding-bottom: 0.875rem;
     align-items: flex-end;
     display: flex;
     flex-direction: row ;
@@ -93,13 +93,13 @@ body>main>.content>.lookup>.title-row>.spring{
 
 
 body>main>.content>.lookup>.title-row>.title{
-    font-size: 22px;
+    font-size: 1.375rem;
 
     font-weight: 350;
 }
 
 body>main>.content>.lookup>.bar{
-    height: 2px;
+    height: 0.125rem;
     width: 100%;
     background-color: black;
 }
@@ -112,7 +112,7 @@ body>main>.content>.lookup>.status-ul{
 
 
 body>main>.content>.lookup>.status-ul>li{
-    border-bottom: rgba(0,0,0,0.1) solid 1px;
+    border-bottom: rgba(0,0,0,0.1) solid 0.0625rem;
 
 
 }
@@ -124,25 +124,26 @@ body>main>.content>.lookup>.status-ul>li>div{
 
 
 
-body>main>.content>.lookup>.status-ul>li>div>span{
+body>main>.content>.lookup>.status-ul>li>div>span,
+body>main>.content>.lookup>.status-ul>li>div>a
+
+{
     font-size: 1.8rem;
     font-weight: 700;
     display: inline-block;
     padding: 0.5rem;
-    /*width: 35px;*/
-    /*text-align: center;*/
-    /*top: 3px;*/
+
     left: 0.465rem;
     position: relative;
     color: rgba(0,0,0,0.8);
-    /*color: red;*/
-    /*display: block;*/
+
 }
 
-body>main>.content>.lookup>.status-ul>li>div>.small-text{
+body>main>.content>.lookup>.status-ul>li>div>.small-text,
+body>main>.content>.lookup>.status-ul>li>div>a{
     cursor: pointer;
-    padding: 25px 2rem 28px 1rem;
-    font-size: 14px;
+    padding: 1.5625rem 2rem 1.75rem 1rem;
+    font-size: 0.875rem;
 
 }
 
@@ -167,9 +168,14 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
     body>main>.content>.lookup>.status-ul>li>div>.small-text{
-        padding:0;
-
+        /*padding:0 0 0 0.5rem;*/
+        font-size: 0.5rem;
+        padding: 0;
     }
+    body>main>.content>.lookup>.status-ul>li>div>a{
+        padding: 0.5rem;
+    }
+
 
     body>main>.content>ul>li>a {
         height: unset;
@@ -189,5 +195,6 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
 }
+
 
 

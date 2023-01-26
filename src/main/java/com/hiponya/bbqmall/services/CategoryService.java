@@ -1,5 +1,6 @@
 package com.hiponya.bbqmall.services;
 
+import com.hiponya.bbqmall.controllers.HomeController;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
@@ -9,6 +10,8 @@ import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.ICategoryMapper;
+import com.hiponya.bbqmall.mappers.IHomeMapper;
+import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +26,11 @@ import static java.util.Arrays.stream;
 public class CategoryService {
 
     private final ICategoryMapper categoryMapper;
-
+    private final IHomeMapper iHomeMapper ;
     @Autowired
-    public CategoryService(ICategoryMapper categoryMapper) {
+    public CategoryService(ICategoryMapper categoryMapper, IHomeMapper iHomeMapper) {
         this.categoryMapper = categoryMapper;
+        this.iHomeMapper = iHomeMapper;
     }
 
     public CategoryEntity getCategoryIndex(int index) {
@@ -96,9 +100,25 @@ public class CategoryService {
         return this.categoryMapper.selectWishlistSumQuantityByUserId(id);
     }
 
-    public ProductEntity getProductByIndex(int pid) {
+    public ProductReadVo getProductByIndex(int pid) {
 
-        return this.categoryMapper.selectProductByIndex(pid);
+
+
+
+        ProductReadVo product =this.categoryMapper.selectProductByIndex(pid);
+
+        ProductImageEntity[] productImages = this.iHomeMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+        int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+        product.setImageIndexes(productImageIndexes);
+
+        DetailImageEntity[] detailImages = this.iHomeMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+        int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+        product.setDetailImageIndexes(detailImageIndexes);
+
+
+
+
+        return product;
     }
 
     public Enum<? extends IResult> deleteWishlist(WishlistEntity wishlist, UserEntity user) {
@@ -154,9 +174,9 @@ public class CategoryService {
         return this.categoryMapper.selectThirdEightProducts();
     }
 
-    public ProductReadVo[] getProducts(int cid, int sid){
+    public ProductReadVo[] getProducts(int cid, int sid, PagingModel paging){
 
-        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid, sid);
+        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid, sid, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
         for (ProductReadVo product :products){
             ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
@@ -180,6 +200,32 @@ public class CategoryService {
         return this.categoryMapper.selectDetailImageByIndex(index);
     }
 
+    public ProductReadVo[] getSearchProducts(PagingModel paging, String keyword){
+
+        ProductReadVo[] products =this.categoryMapper.selectProductsByKeyword(keyword, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+        for (ProductReadVo product :products){
+            ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
+            DetailImageEntity[] detailImages = this.categoryMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+            int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+            product.setDetailImageIndexes(detailImageIndexes);
 
 
+        }
+
+
+        return products;
+    }
+
+    public int getCategoryProductsCount(int cid){
+        return this.categoryMapper.selectCategoryProductCountById(cid);
+    }
+
+    public int getSearchProductsCount(String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+//
+        return this.categoryMapper.selectSearchProductsCountByKeyword(keyword );
+
+    }
 }

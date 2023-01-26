@@ -16,7 +16,7 @@ public interface ICategoryMapper {
 
     CategoryEntity[] selectCategories();
 
-    ProductEntity selectProductByIndex(@Param(value = "pid") int pid);
+    ProductReadVo selectProductByIndex(@Param(value = "pid") int pid);
 
     CategoryEntity selectCategories2(@Param(value = "index") int index);
 
@@ -59,8 +59,19 @@ public interface ICategoryMapper {
 
     int deleteWishlistByIndex(@Param(value = "index") int index);
 
+    int selectCategoryProductCountById(@Param(value = "cid") int cid);
+    int selectSearchProductsCountByKeyword(@Param(value = "keyword") String keyword);
+
     ProductReadVo[] selectProductsByDetailIndex(@RequestParam(value = "cid") int cid,
-                                                @RequestParam(value="sid") int sid);
+                                                @RequestParam(value="sid") int sid,
+                                                @Param(value = "limit") int limit,
+                                                @Param(value = "offset") int offset
+    );
+
+    ProductReadVo[] selectProductsByKeyword(@Param(value = "keyword") String keyword,
+                                            @Param(value = "limit") int limit,
+                                            @Param(value = "offset") int offset
+    );
 
     ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
 

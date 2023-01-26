@@ -25,6 +25,7 @@ import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 
@@ -63,9 +64,9 @@ public class MemberController {
 
     @RequestMapping(value = "email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postEmail(UserEntity user, EmailAuthEntity emailAuth) throws NoSuchAlgorithmException, MessagingException {
+    public String postEmail(UserEntity user, EmailAuthEntity emailAuth, HttpServletRequest request) throws NoSuchAlgorithmException, MessagingException {
         System.out.println(user.getEmail());
-        Enum<? extends IResult> result = this.memberService.sendEmailAuth(user, emailAuth);
+        Enum<? extends IResult> result = this.memberService.sendEmailAuth(user, emailAuth, request);
 
         JSONObject responseObjects = new JSONObject();
         responseObjects.put("result", result.name().toLowerCase());

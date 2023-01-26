@@ -282,7 +282,7 @@ public class BbsController {
         responseObject.put("result", result.name().toLowerCase());
         if (result == CommonResult.SUCCESS) {
 
-            responseObject.put("url", "http://localhost:8080/board/image?idd=" + image.getIndex()); //idd값으로 get이 들어감
+            responseObject.put("url", "/board/image?idd=" + image.getIndex()); //idd값으로 get이 들어감
 
         }
 

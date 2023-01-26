@@ -81,7 +81,7 @@ body>main>.goods-row>.goods-container>.goods>a{
 
 body>main>.goods-row>.goods-container>.goods>a>img{
     width: 100%;
-    min-height: 18.25rem;
+    height: 18.25rem;
 
     /*display: inline-block;*/
 }
@@ -200,7 +200,7 @@ body>main>.event-row-big{
     width: 100%;
     margin: 0;
     padding: 0;
-    height: 18.9375rem;
+    max-height: 18.9375rem;
 }
 body>main>.event-row-big>img{
     width: 100%;
@@ -258,4 +258,15 @@ body>main> .review-row> .review-container>.review>a>img{
     /*max-width: 10.125rem;*/
     height: 13.125rem;
 
+}
+
+body>.floating-banner#floatingBanner{
+    z-index: 100;
+    position: fixed;
+    top: 80%;
+    right: 9.45rem;
+    box-shadow: 0 0.25rem 0.3125rem 0.0625rem rgba(0,0,0,0.1);
+    background-color: white;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
 }

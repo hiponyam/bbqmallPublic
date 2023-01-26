@@ -29,6 +29,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class MemberService {
     }
 
     @Transactional //모두성공해야 보내주겟다
-    public Enum<? extends IResult> sendEmailAuth(UserEntity user, EmailAuthEntity emailAuth) throws NoSuchAlgorithmException, MessagingException {
+    public Enum<? extends IResult> sendEmailAuth(UserEntity user, EmailAuthEntity emailAuth, HttpServletRequest request) throws NoSuchAlgorithmException, MessagingException {
         //뭔진모르겠는데 반드시 상속받거나 구현하고 있어야한다.
         UserEntity existingUser = this.memberMapper.selectUserByEmail(user.getEmail());
         if (existingUser != null) {
@@ -86,6 +87,7 @@ public class MemberService {
 
         Context context = new Context(); //서비스에서 html 파일갑이용하기 위해
         context.setVariable("code", emailAuth.getCode());
+        context.setVariable("domain", String.format("https://%s", request.getServerName()));
 
 
         //메일보내기

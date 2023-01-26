@@ -653,7 +653,7 @@ if (window.document.getElementById('isMine').value==='1') {
                             alert('삭제성공');
 
                             if (window.document.getElementById('bid').value===("notice")){
-                                window.location.href = `http://localhost:8080/board/`;
+                                window.location.href = `/board/`;
                             }else {
                                 window.location.href = `/board/?bid=` + window.document.getElementById('bid').value;
 

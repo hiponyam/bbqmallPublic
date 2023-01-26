@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <title>BBQ몰</title>
 
-
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/index.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <script defer th:src="@{/bbs/resources/scripts/index.js}"></script>
 
 
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
 <div class="swiper-row">
     <img class="swiper"
          src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/banner/10/images_1.png?ver=3000">
@@ -56,7 +59,7 @@
         <ul class="goods-container">
             <li class="goods" th:each="product,i: ${products}" th:if="${i.count >8 and i.count < 17}">
                 <a th:href="@{view (pid=${product.getProductIndex()})}"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지"
-                                 title="이미지"></a>
+                                                                             title="이미지"></a>
 
                 <div class="goods-info">
                     <a th:href="@{view (pid=${product.getProductIndex()})}" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
@@ -135,7 +138,7 @@
         <ul class="goods-container">
             <li class="goods" th:each="product,i: ${products}" th:if="${i.count >16}">
                 <a th:href="@{view (pid=${product.getProductIndex()})}"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지"
-                                 title="이미지"></a>
+                                                                             title="이미지"></a>
 
                 <div class="goods-info">
                     <a th:href="@{view (pid=${product.getProductIndex()})}" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>

@@ -75,9 +75,9 @@ if(form['bidValue'].value==="notice") {
                             alert('작성 성공');
                             if (bidValue.value==='pi'|| bidValue.value==='pr'){
 
-                                window.location.href = `http://localhost:8080/board/?bid=`+bidValue.value;
+                                window.location.href = `/board/?bid=`+bidValue.value;
                             }else {
-                                window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                                window.location.href = `/board/`;//자바스크립트문법
                             }
 
                             break;
@@ -219,7 +219,7 @@ else if(form['bidValue'].value==="bp") {
 
                             alert('작성 성공');
 
-                            window.location.href = `http://localhost:8080/board/?bid=bp`;//자바스크립트문법
+                            window.location.href = `/board/?bid=bp`;//자바스크립트문법
 
 
                             break;

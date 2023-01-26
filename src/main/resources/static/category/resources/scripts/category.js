@@ -6,6 +6,8 @@ let sid = window.document.querySelectorAll('.sort-index');
 const cid = window.document.getElementById('cid');
 const rankingSid=  window.document.getElementById('rankingSid');
 
+
+
 // for (let i = 0; i < sorting.length; i++) {
 //     sorting.item(i).addEventListener('click', (e) => {
 //         e.preventDefault();

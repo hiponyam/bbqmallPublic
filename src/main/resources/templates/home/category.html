@@ -5,10 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title th:text = "${'BBQ몰 - ' + (title)}"></title>
-    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
-    <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
+    <title th:text="${'BBQ몰 - '+ title}"></title>
+
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+
+    <!--    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">-->
+    <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
+
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/category/resources/scripts/category.js}"></script>
 </head>
@@ -17,7 +21,7 @@
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
 <main>
-    <input type="hidden" name = "cid" id="cid" th:value="${category.getIndex()}">
+    <input type="hidden" name="cid" id="cid" th:value="${category.getIndex()}">
     <div class="swiper">
         <div>
             <div class="catalog-page">
@@ -25,12 +29,15 @@
                     <div class="search-filter-wrap">
                         <div class="search-filter">
                             <ul class="search-list" rel="searchList">
-                                <li class = "li" th:each="sort : ${sorts}">
+                                <li class="li" th:each="sort : ${sorts}">
                                     <label class="active">
-                                        <a th:href = "@{/category (cid=${cid},sid=${sort.getIndex()})}" class="btn-container">
-                                            <input type="button" name="ranking" th:value="${sort.getSort()}" class = "button" rel="sorting" id="ranking">&nbsp
+                                        <a th:href="@{/category (cid=${cid},sid=${sort.getIndex()})}"
+                                           class="btn-container">
+                                            <input type="button" name="ranking" th:value="${sort.getSort()}"
+                                                   class="button" rel="sorting" id="ranking">&nbsp
                                         </a>
-                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="sid" class="sort-index">
+                                        <input type="hidden" name="rankingSid" th:value="${sort.getIndex()}" rel="sid"
+                                               id="sid" class="sort-index">
                                     </label>
                                 </li>
 
@@ -38,44 +45,83 @@
                         </div>
                     </div>
 
-                    <div class = "border-line">
+                    <div class="border-line">
 
                     </div>
                     <ul class="product-container">
                         <!--/*@thymesVar id="products" type="com.hiponya.bbqmall.vos.product.ProductReadVo"*/-->
-                        <li th:each = "product : ${products}" class="products">
-                            <div th:text = "${product.getProductIndex()}" hidden>3</div>
+                        <li th:each="product : ${products}" class="products">
+                            <div th:text="${product.getProductIndex()}" hidden>3</div>
+                            <a class="image" th:href="@{view (pid=${product.getProductIndex()})}">
+                                <!--                   <img th:each="image : ${product.getImageIndexes()}">-->
+                                <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지"
+                                     title="이미지">
+                            </a>
                             <div class="product-box">
-                                <a class = "title" th:href = "@{/view (pid = ${product.getProductIndex()})}"> <!-- 클릭시 이동할 view 주소 -->
-                                    <a th:href="@{view (pid=${product.getProductIndex()})}" class="img">
-                                        <!--                   <img th:each="image : ${product.getImageIndexes()}">-->
-                                        <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지" class="image">
-                                    </a>
-                                    <div class = "comment" th:text = "${'[' + product.getProductName() + ']'}">내용</div>
+                                <a class="title" th:href="@{/view (pid = ${product.getProductIndex()})}">
+                                    <!-- 클릭시 이동할 view 주소 -->
+                                    <div class="comment" th:text="${'[' + product.getProductName() + ']'}">내용</div>
                                     <span class="sale" th:text="${product.getSaleQuantity()}">13%</span>
                                     <span class="percent">%</span>
-                                    <span class = "price" th:text = "${product.getPrice - (product.getPrice() * product.getSaleQuantity() / 100)}">가격</span>
+                                    <span class="price"
+                                          th:text="${product.getPrice - (product.getPrice() * product.getSaleQuantity() / 100)}">가격</span>
                                     <span class="won">원</span>
                                     <span class="base-price" th:text="${product.getPrice()}  + '원'">상품기본가격</span>
                                 </a>
                             </div>
-<!--                            <div th:text = "${product.getProductName()}">레너드</div>-->
-<!--                            <div th:text = "${product.getAmount()}">17</div>-->
-<!--                            <div th:text = "${#dates.format(product.getModifiedOn(), 'yyyy-MM-dd HH:mm:ss')}">2022-01-03 00:00:00</div>-->
                         </li>
+
 
                     </ul>
 
                 </form>
-<!--                <div class="paging-navigation">-->
-<!--                    <a href = "#" class = "page">1</a>-->
-<!--                    <a href = "#" class = "page">2</a>-->
-<!--                    <a href = "#" class = "page">3</a>-->
-<!--                    <a href = "#" class = "page">4</a>-->
-<!--                    <a href = "#" class = "page">5</a>-->
-<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angle-right"></i></a>-->
-<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angles-right"></i></a>-->
-<!--                </div>-->
+                <div class="page-container"
+                     th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+
+                    <a class="page"
+                       th:if="${paging.requestPage >1}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
+
+
+                        <i class="fa-solid fa-angles-left"></i>
+
+                    </a>
+
+                    <a class="page"
+                       th:if="${paging.requestPage >1}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage -1).build().toUriString()}}">
+
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!--                                시퀀스를하면 정수 시작부터 정수끝을 배열로 돌려준다.-->
+                    <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                       th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
+
+
+                       th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}"
+
+                    >
+                        <span th:text="${page}"> </span>
+                    </a>
+
+
+                    <a class="page"
+                       th:if="${paging.requestPage < paging.maxPage}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage +1).build().toUriString()}}">
+
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </a>
+
+                    <a class="page"
+                       th:if="${paging.requestPage < paging.maxPage}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>

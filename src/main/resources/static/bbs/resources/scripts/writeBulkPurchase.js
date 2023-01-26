@@ -146,7 +146,7 @@ form.onsubmit = e =>{
                         alert('작성 성공');
                         // const index = responseObject['index'];
                         // window.location.href=`read?aid=${index}`;//자바스크립트문법
-                        window.location.href=`http://localhost:8080/board/?bid=bp`;//자바스크립트문법
+                        window.location.href=`/board/?bid=bp`;//자바스크립트문법
 
 
                         // window.location.href='http://localhost:8080/bbs/write?bid='+form['bid'].value;
