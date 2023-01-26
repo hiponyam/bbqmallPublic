@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BBQ몰 -마이페이지</title>
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myPage.css}">
+    <!--    <script defer th:src="@{/member/resources/scripts/login.js}"></script>-->
+
+    <script th:if="${session.user==null}">
+
+        alert("로그인 해주세요.");
+        window.location.href='/member/login';
+
+
+    </script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+
+<main >
+    <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
+
+
+
+
+    <div class="content my-page-content" th:if="${session.user}">
+        <table>
+            <tbody>
+            <tr class="user-tr">
+                <td class="user-menu-title">
+                    <h1 th:text="${session.user.getName()+'님 반갑습니다.'}">임철홍님 반갑습니다.</h1>
+                    <a class="modify-info" th:href="@{/member/modifyMyInfo}">회원정보 수정</a>
+                </td>
+                <td class="spring"></td>
+                <td class="user-menu">
+                    <a th:href="@{/member/myShopping?bid=7}">   적립금 &nbsp; > </a>
+                    <p><span>0</span><span>원</span></p>
+                </td>
+                <td class="user-menu">
+                    <a th:href="@{/member/myShopping?bid=8}">  쿠폰 &nbsp; > </a>
+                    <p><span>0</span><span>장</span></p>
+
+                </td>
+                <td class="user-menu">
+                    <a th:href="@{/member/myShopping?bid=4}">      찜한 상품 &nbsp; > </a>
+                    <p><span>0</span><span>개</span></p>
+
+                </td>
+                <td class="user-menu">
+                    <a th:href="@{/member/myShopping?bid=5}">   최근 본 상품 &nbsp; > </a>
+                    <p><span>0</span><span>개</span></p>
+
+                </td>
+
+            </tr>
+
+            <tr class="user-order-tr">
+                <td>
+                    <h1>최근 주문 내역</h1>
+                    <a th:href="@{/member/myShopping?bid=1}">더보기&nbsp; ></a>
+                </td>
+
+                <td class="spring"></td>
+
+                <td class=" user-order">
+                    <img alt="주문접수" title="주문접수" src="/resources/images/my_order_p1.png">
+                    <p><span>주문접수</span>
+                        <span>0</span></p>
+                </td>
+                <td class="arrow">〉  </td>
+                <td class=" user-order">
+                    <img alt="주문접수" title="주문접수" src="/resources/images/my_order_p2.png">
+                    <p><span>결제확인</span>
+
+                        <span>0</span>
+                    </p>
+                </td>
+                <td class="arrow">〉 </td>
+
+                <td class=" user-order">
+                    <img alt="주문접수" title="주문접수" src="/resources/images/my_order_p3.png">
+                    <p> <span>상품준비중</span>
+
+                        <span>0</span></p>
+
+                </td>
+                <td class="arrow">〉 </td>
+
+                <td class=" user-order">
+                    <img alt="주문접수" title="주문접수" src="/resources/images/my_order_p4.png">
+                    <p><span> 배송중</span>
+
+                        <span>0</span></p>
+
+                </td>
+                <td class="arrow">〉 </td>
+
+                <td class=" user-order">
+                    <img alt="주문접수" title="주문접수" src="/resources/images/my_order_p5.png">
+                    <p><span>  배송완료</span>
+
+
+                        <span>0</span></p>
+
+                </td>
+
+            </tr>
+            <tr class="history-row">
+
+                <td class="history-content">
+                    <p>최근 1개월 내 내역이 없습니다.</p>
+                </td>
+
+            </tr>
+
+            <tr class="service-row">
+
+                <td class="service">
+                    <h1><a th:href="@{/member/myShopping?bid=2}">반품 교환</a></h1>
+                    <span>최근 1개월 내 내역이 없습니다.</span>
+                </td>
+                <td class="service">
+                    <h1><a th:href="@{/member/myShopping?bid=3}">취소 환불</a></h1>
+                    <span>최근 1개월 내 내역이 없습니다.</span>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+</main>
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>
+

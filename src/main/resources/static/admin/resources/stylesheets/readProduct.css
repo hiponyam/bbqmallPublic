@@ -1,0 +1,288 @@
+
+body>main{
+    width: 80rem;
+
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-start;*/
+    align-items: flex-start;
+}
+
+
+
+body>main>.content {
+    width: 100%;
+
+
+    display: block;
+    padding-top: 8rem;
+    padding-bottom: 6.25rem;
+
+}
+
+
+body> main> .content>.title-container{
+    padding-top: 0;
+    padding-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: -0.125rem;
+    font-weight: 700;
+    border-bottom: rgba(0,0,0,0.4) solid 0.0625rem;
+}
+
+
+
+
+
+
+
+
+body> main> .content > form>table{
+    border-collapse: collapse;
+}
+body>main>.content>form>table>.thead>tr{
+    background-color: rgba(0,0,0,0.01);
+
+}
+
+body>main>.content>form>table>.thead>tr>th{
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    padding: 0.5rem;
+
+
+}
+body>main>.content>form>table>.thead
+{
+    background-color: rgba(0,0,0,0.05);
+
+
+}
+
+body>main>.content>form>table>.thead>tr>th:not(:first-of-type){
+    display: inline-block;
+    padding: 0.5rem;
+    min-width: 2rem;
+    /*display: flex;*/
+    /*width: 100%;*/
+
+}
+body>main>.content>form>table .image-column{
+    width: 10rem;
+    display: inline-block;
+    padding: 0.5rem;
+
+}
+
+body>main>.content>form>table .number-column{
+    width: 2rem;
+    display: inline-block;
+    /*padding: 0.5rem;*/
+}
+
+body>main>.content>form>table .name-column{
+    width: 17rem;
+    display: inline-block;
+    padding: 0.5rem;
+    /*overflow: auto;*/
+
+}
+body>main>.content>form>table .price-column{
+    width: 6rem;
+    display: inline-block;
+    padding: 0.5rem;
+
+
+}
+body>main>.content>form>table .date-column{
+    display: inline-block;
+    padding: 0.5rem;
+    /*width: 10%;*/
+    width: 9rem;
+
+}
+
+body>main>.content>form>table>.thead>tr>th>label>.detail-index{
+    display: none;
+}
+
+body>main>.content>form>table>.thead>tr>th>label>select{
+
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    font-family: inherit;
+    font-weight: 700;
+    outline: none;
+    color: rgba(0,0,0,0.8);
+    margin-right: 0.5rem;
+
+}
+
+
+
+body> main> .content > form>table> tbody> tr> th{
+
+    background-color: rgba(0,0,0,0.05);
+    padding: 1rem;
+    min-width: 5rem;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+
+}
+body> main> .content > form>table> tbody> tr> td{
+    background-color: rgba(0,0,0,0.01);
+    width: 100%;
+    padding: 0.5rem;
+}
+
+
+
+
+body> main> .content > form>table> tbody> .data-row>td>ul{
+    max-height: 70rem;
+    overflow: auto;
+    /*color: #CF152D;*/
+    /*background: #CF152D;*/
+    display: block;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    border-bottom: rgba(0,0,0,0.2) solid 0.0625rem;
+    padding: 0.5rem 0;
+
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container{
+    max-width: 10rem;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    padding: 0 0.5rem ;
+    /*padding: 0.5rem 0.5rem 0 0;*/
+    /*padding-bottom: 0.5rem;*/
+    overflow: auto;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar{
+    height: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0.1);
+
+
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 999rem;
+
+}
+
+
+
+body> main> .content > form>table> tbody> .data-row>td>ul>li>span>img{
+    max-height: 5rem;
+
+}
+
+
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a{
+    color: rgba(0,0,0,0.6);
+
+}
+
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a.button{
+
+    color: white;
+    margin-right: 0.5rem;
+    /*border: rgba() solid 0.3rem;*/
+    background-color: #CF152D;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a.button:hover{
+    background-color: black;
+}
+
+
+
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a>.price-column{
+    text-align: end;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.date-column{
+    text-align: center;
+}
+
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.number-column{
+    text-align: center;
+    padding-right: 0.5rem;
+}
+
+
+
+
+
+@media screen and (max-width : 87.5rem) {
+
+    body > main {
+        width: 100%;
+        padding: 0;
+    }
+
+    body>main>article{
+        padding:0 1.625rem  0.5rem 0;
+    }
+
+
+
+    body>main>.content>form>table .number-column,
+    body>main>.content>form>table .image-column,
+    body>main>.content>form>table .name-column,
+    body>main>.content>form>table .price-column,
+    body>main>.content>form>table .date-column
+    {
+        width: unset;
+    }
+    body>main.cs-center>.content>form>table>thead>tr.name-row>th.image-column{
+        display: none;
+    }
+    body>main>.content>form>table>tbody>tr>td>ul>li>span>img{
+        display: none;
+    }
+
+    body > main > article {
+        font-size: 1.2rem;
+        padding: 0 1rem 0.5rem 0;
+    }
+
+    body > main > article > ul > li > a {
+        padding: 0.375rem 0 0.4375rem 0;
+        width: 6.75rem;
+    }
+
+
+
+    body> main> .content > form>table> tbody> tr> th{
+
+        padding: 1rem;
+        min-width: 2rem;
+    }
+
+}
+@media screen and (max-width : 53.75rem) {
+
+}
+
+
+
+
+
+
+
+
+

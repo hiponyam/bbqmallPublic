@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeNotice.css}">
+    <script defer th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
+    <script defer th:src="@{/bbs/resources/scripts/writeNotice.js}"></script>
+
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+
+<main class="cs-center">
+    <input hidden id="bid" th:value="${bid}">
+
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <div class="content">
+
+        <div class="title-container">
+            <h1 th:text="${bid==null?'공지사항 글쓰기':'상품 글쓰기'}">공지사항 글쓰기</h1>
+        </div>
+
+        <form class="write-form" id="form">
+
+            <table class="content-table" id="table">
+                <tbody>
+                <tr class="class-row">
+                    <th>분류</th>
+                    <td>
+
+
+                        <label class="label">
+                            <span th:if="${bid!=null && !bid.equals('notice')}">상품</span>
+                            <span hidden>보드아이디</span>
+                            <select name="bid">
+                                <option selected value="notice">
+                                    공지
+                                </option>
+
+                                <option value="event">
+                                    이벤트
+                                </option>
+                                <option value="urgent">
+                                    긴급공지
+                                </option>
+                            </select>
+
+                        </label>
+                    </td>
+                </tr>
+                <tr class="title-row">
+                    <th>제목</th>
+                    <td>
+
+
+                        <label class="label">
+
+                            <span hidden>제목</span>
+                            <input class="--object-input input" maxlength="100" name="title" placeholder="제목을 입력해주세요"
+                                   type="text">
+
+                        </label>
+                    </td>
+                </tr>
+                <tr class="text-box-row">
+                    <th>내용</th>
+                    <td>
+                        <label class="label">
+                            <span hidden>내용</span>
+                            <textarea class="--object-input input" maxlength="10000" name="content"
+                                      placeholder="내용을 입력해주세요"></textarea>
+
+                        </label>
+                    </td>
+                </tr>
+
+                <tr class="button-row">
+                    <th></th>
+                    <td>
+                        <label>
+                            <input class="before" name="back" value="돌아가기" type="button">
+                        </label>
+                        <span class="spring"></span>
+                        <label>
+                            <input class="submit" name="submit" value="작성하기" type="submit">
+
+                        </label>
+
+
+
+                    </td>
+
+
+                </tr>
+
+
+
+                </tbody>
+            </table>
+        </form>
+
+
+
+
+
+
+
+
+    </div>
+
+</main>
+
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+
+</body>
+</html>

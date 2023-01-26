@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 상품조회</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/readProduct.css}">
+    <script defer th:src="@{/admin/resources/scripts/readProduct.js}"></script>
+    <script th:if="${session.user==null || !session.user.isAdmin()}">
+        alert("없는 페이지입니다.");//일반인에게 어드민 페이지를 숨긴다.
+        window.location.href=`/`;
+    </script>
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="cs-center">
+
+    <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
+    <div class="content">
+        <div class="title-container">
+            <h1>상품조회 / 수정 / 삭제</h1>
+        </div>
+
+
+        <form id="form">
+            <input hidden name="nowDetailIndex" th:value="${detailIndex}">
+            <input hidden name="nowMenuIndex" th:value="${menuIndex}">
+            <table>
+                <thead class="thead">
+                <tr>
+                    <th rowspan="2">
+                        상품 종류
+                    </th>
+                    <th>
+                        <label>
+                            <select name="menuIndex">
+
+                                <option value="0" selected>
+                                    선택
+                                </option>
+                                <option value="99">
+                                    전체
+                                </option>
+
+                                <option value=1>
+                                    치킨
+                                </option>
+                                <option value=2>
+                                    닭가슴살
+                                </option>
+                                <option value=3>
+                                    간편식
+                                </option>
+
+                            </select>
+
+                        </label>
+
+                        <label>
+                            <select name="detailIndex1" class="detail-index">
+                                <option value="0" selected>
+                                    선택
+                                </option>
+                                <option value="99">
+                                    전체
+                                </option>
+                                <option value="1">
+                                    튀김류
+                                </option>
+                                <option value="2">
+                                    구이류
+                                </option>
+                                <option value="3">
+                                    순살
+                                </option>
+                                <option value="4">
+                                    봉
+                                </option>
+                                <option value="5">
+                                    닭갈비
+                                </option>
+
+
+                            </select>
+                        </label>
+
+
+                        <label>
+                            <select name="detailIndex2" class="detail-index">
+                                <option selected value="0">
+                                    선택
+                                </option>
+                                <option value="99">
+                                    전체
+                                </option>
+                                <option value="6">
+                                    패키지
+                                </option>
+                                <option value="7">
+                                    수비드
+                                </option>
+                                <option value="8">
+                                    소세지&핫바
+                                </option>
+                                <option value="9">
+                                    만두&육포
+                                </option>
+                                <option value="10">
+                                    닭가슴살
+                                </option>
+                                <option value="11">
+                                    스테이크&큐브
+                                </option>
+                            </select>
+                        </label>
+
+
+                        <label>
+                            <select name="detailIndex3" class="detail-index">
+                                <option selected value="0">
+                                    선택
+                                </option>
+                                <option value="99">
+                                    전체
+                                </option>
+                                <option value="12">
+                                    즉석간편식
+                                </option>
+                                <option value="13">
+                                    안주
+                                </option>
+                                <option value="14">
+                                    탕찜
+                                </option>
+                                <option value="15">
+                                    혼합세트
+                                </option>
+                                <option value="16">
+                                    간식류
+                                </option>
+                            </select>
+                        </label>
+
+                    </th>
+
+
+                </tr>
+                <tr class="name-row">
+                    <th class="number-column">
+                        넘버
+                    </th>
+                    <th class="image-column">
+                        타이틀 이미지
+                    </th>
+
+
+                    <th class="name-column">
+                        상품명
+                    </th>
+                    <th class="price-column">
+                        가격
+                    </th>
+                    <th class="date-column">
+                        등록날짜
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr class="data-row">
+
+                    <th>상품</th>
+                    <td>
+                        <ul>
+                            <li th:each="product :${products}">
+                                <span class="number-column" th:text="${product.getProductIndex()}">00</span>
+                                <span class="image-container image-column">
+
+                                <img th:each="image : ${product.getImageIndexes()}"
+                                     th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
+
+                            </span>
+
+                                <!--                            <img th:src="@{/admin/productImage?index= (${product.getProductIndex()})}">-->
+                                <a href="#">
+
+                                    <span class="name-column"
+                                          th:text="${product.getProductName()}">비비큐</span>
+
+                                    <span class="price-column" th:text="${product.getPrice()}+' 원'">5000원</span> </a>
+                                <span class="date-column"
+                                      th:text="${#dates.format(product.getCreatedOn(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
+                                <span class="spring"></span>
+                                <a class="button" th:href="@{/admin/update (pid= ${product.getProductIndex()})}">수 정</a><a class="button delete" href="#">삭 제</a>
+                                <input hidden class="pid" th:value="${product.getProductIndex()}">
+                            </li>
+
+
+                        </ul>
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </form>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>

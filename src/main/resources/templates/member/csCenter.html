@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 고객센터</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/csCenter.css}">
+    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="cs-center">
+
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <div class="content">
+
+
+        <ul>
+            <li>
+
+                <a th:href="@{/board/ (bid=pi)}">
+                    <img alt="배송문의" title="배송문의" src="/resources/images/icon_cs_02.png">
+                    배송문의
+                </a>
+
+            </li>
+
+            <li>
+
+
+                <a th:href="@{/board/ (bid=pi)}">
+                    <img alt="반품/교환문의" title="반품/교환문의" src="/resources/images/icon_cs_03.png">
+                    반품/교환문의
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/board/ (bid=pi)}">
+                    <img alt="상품문의" title="상품문의" src="/resources/images/icon_cs_01.png">
+                    상품문의
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/board/ (bid=pi)}">
+                    <img alt="쿠폰내역" title="쿠폰내역" src="/resources/images/icon_cs_09.png">
+                    쿠폰내역
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/board/ (bid=pi)}">
+                    <img alt="적립금내역" title="적립금내역" src="/resources/images/icon_cs_10.png">
+                    적립금내역
+                </a>
+
+            </li>
+            <li>
+
+
+                <a href="/board/?bid=qna">
+                    <img alt="자주묻는질문" title="자주묻는질문" src="/resources/images/icon_cs_05.png">
+                    자주묻는질문
+                </a>
+
+            </li>
+
+
+        </ul>
+
+        <div class="question">
+            <div class="title-row">
+                <h1 class="title">자주 묻는 질문 TOP5</h1>
+                <span class="spring"></span>
+                <a href="/board/?bid=qna" class="more">더보기 ＞</a>
+            </div>
+            <div class="bar"></div>
+            <ul class="question-ul">
+
+                <li class="question">
+                    <div>
+                        <span>Q</span>
+                        <span class="question-button">[배송문의] 브랜드 별 배송비 알고싶어요!</span>
+                    </div>
+                </li>
+                <li class="answer">
+                    <div>
+                        <span>A</span>
+                        <div>
+                            <p>BBQ 배송과 각 브랜드 개별 배송비는 별도로 부과됩니다.</p>
+                            <p>브랜드 개별 배송: 브랜드 정책에 따라 무료배송 혹은 배송비 부과 (3,000원)</p>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="question">
+                    <div>
+                        <span>Q</span>
+                        <span class="question-button">[상품문의] 수령한 상품을 확인해보니 파손되어 있어요.</span>
+                    </div>
+                </li>
+                <li class="answer">
+                    <div>
+                        <span>A</span>
+                        <div>
+                            <p>파손시에는 박스 파손 부위 / 박스에 붙어있는 송장 사진 / 내품 사진 총 3장</p>
+                            <p>e-commerce@bbq.co.kr으로 사진과 성함 전달 주시면 순차적으로 확인 후 처리 도움 드리리고 있습니다.</p>
+                        </div>
+
+                    </div>
+                </li>
+
+
+                <li class="question">
+                    <div>
+
+                        <span>Q</span>
+                        <span class="question-button">[교환&반품] 불량, 하자, 오배송되어 교환하고 싶습니다.</span>
+                    </div>
+                </li>
+                <li class="answer">
+                    <div>
+                        <span>A</span>
+                        <div>
+                            <p>제품에 이상이 있거나 오배송 되었을 경우에는 택배비는 저희쪽에서 부담합니다.</p>
+                            <p> 고객센터(1588-9282)로 연락을 주시면 해당 부분에 관련하여 안내 도움 드리겠습니다.</p>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="question">
+                    <div>
+                        <span>Q</span>
+                        <span class="question-button">[회원가입/로그인] 아이디/패스워드를 분실했습니다. 어떻게 하나요?</span>
+                    </div>
+                </li>
+                <li class="answer">
+                    <div>
+                        <span>A</span>
+                        <div>
+                            <p>로그인 화면에서 아이디와 패스워드를 검색하실 수 있습니다.</p>
+                            <p>이를 통해서도 확인이 어려우시다면 BBQ몰 고객센터 (1588-9282)로 연락주세요.</p>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="question">
+                    <div>
+                        <span>Q</span>
+                        <span class="question-button">[회원가입/로그인] 꼭 회원가입을 해야하나요? 비회원으로 주문하려면 어떻게 해야 하나요?</span>
+                    </div>
+                </li>
+                <li class="answer">
+                    <div>
+                        <span>A</span>
+                        <div>
+                            <p>저희 BBQ몰은 회원과 비회원 모두 주문을 하실 수 있습니다.</p>
+                            <p>회원으로 가입 후 주문을 하실 경우 BBQ몰에서 진행하는 모든 이벤트 및 적립금, 할인 혜택을 받으실 수 있습니다.</p>
+                            <p>비회원으로 주문하셨을 경우 주문번호를 입력하셔야 주문내역이 확인됩니다.</p>
+                            <p>주문번호를 모르실 경우 저희 고객센터로 연락 주시면 친절하게 안내해드리겠습니다.</p>
+                        </div>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>

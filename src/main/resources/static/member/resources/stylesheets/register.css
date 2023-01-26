@@ -1,0 +1,607 @@
+/*@charset "UTF-8";*/
+
+
+body > main > .content{
+    padding-bottom: 3.125rem;
+}
+
+
+
+
+body > main > .content> .form{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+    width: 100%;
+    /*background-color: ivory;*/
+}
+
+td,input{
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+
+}
+
+table{
+
+
+    border-collapse: collapse;
+}
+body > main > .content> .form >div> .title{
+
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333333;
+    padding:  4.0625rem 0 2rem 0;
+    /*background-color: red;*/
+    letter-spacing: -0.0625rem;
+}
+body > main > .content> .form >div> .title2{
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+body > main > .content> .form >div> .title2>.icon{
+    color: #ee3400;
+    border: #FFCC00 0.1875rem solid;
+    border-radius: 999rem;
+}
+
+
+
+body > main > .content> .form >.email-check-page{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    width: 22.5rem;
+    /*background-color: moccasin;*/
+
+}
+
+body > main > .content> .form >.email-check-page> table >tbody{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+
+
+
+    font-size: 0.9375rem;
+}
+body > main > .content> .form >.email-check-page> table>tbody>.head {
+
+    width: 22.375rem;
+    height: 2.5rem;
+    border-top: black solid 0.0625rem;
+    border-left: black solid 0.0625rem;
+    border-right: black solid 0.0625rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container{
+    width: 22.5rem;
+    height: 11.875rem;
+    padding-top: 1.875rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container >.icon{
+
+    font-size: 3.75rem;
+}body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container > span {
+
+     padding-top: 2.5rem;
+
+ }
+
+body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button,
+body > main > .content> .form > label>.next
+{
+
+    height: 3rem;
+    width: 22.5rem;
+    background-color: #E31134;
+    border: unset;
+
+    color: white;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 450;
+}
+body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button:hover,
+body > main > .content> .form > label>.next:hover{
+    transition-duration: 500ms;
+    background-color: #FFCC00;
+}
+
+
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: stretch;
+
+
+
+}
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label>.email-text,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label>.email-Auth-Code
+
+{
+    width: 15rem;
+    height: 3rem;
+
+    border: unset;
+
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(0,0,0,0.05);
+}
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label>.code-send-button,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label>.code-check-button
+
+{
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+
+    width: 7.5rem;
+    height: 3rem;
+
+    border: unset;
+    cursor: pointer;
+
+}
+body > main > .content> .form > .text {
+    width: 22.5rem;
+    padding: unset;
+
+}
+
+
+body > main > .content> .form > .text > li{
+    list-style-type: disc;
+
+    font-size: 0.8125rem;
+    margin-top: 0.25rem;
+    color: #999999;
+}
+body> main > .content>.form>.email-check-page>table>tbody>.check-start>td>label>.email-button.visible{
+    display: none;
+}
+/*이메일 인증버튼이 생깁니다.*/
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row,
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row{
+    display: none;
+}
+
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row.visible,
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row.visible{
+    display: block;
+}
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row.disabled>td>label>input{
+    background-color: #545454;
+    color: white;
+    cursor: not-allowed;
+    margin-bottom: 0.625rem;
+
+
+}
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row.disabled>td>label>input{
+    background-color: #0000000D;
+    /*color: #FFCC00;*/
+    color: black;
+    cursor: not-allowed;
+
+}
+
+
+
+
+body> main > .content>.form>label>.next{
+    margin: 0.625rem 0 1.25rem 0;
+    display: none;
+}
+body> main > .content>.form>label>.next.visible{
+    display: block;
+}
+
+
+/*
+step
+0이메일
+1약관동의
+2인서트정보
+3컴플리트
+*/
+
+body>main>.content>.form.step0 >.terms-page,
+body>main>.content>.form.step0 >.insert-userinfo-page,
+body>main>.content>.form.step0 >.complete-page,
+
+body>main>.content>.form.step1 >.email-check-page,
+body>main>.content>.form.step1 >.insert-userinfo-page,
+body>main>.content>.form.step1 >.complete-page,
+body>main>.content>.form.step1 > .text,
+
+
+
+body>main>.content>.form.step2>.email-check-page,
+body>main>.content>.form.step2>.terms-page,
+body>main>.content>.form.step2>.complete-page,
+body>main>.content>.form.step2 > .text,
+
+body>main>.content>.form.step3>.email-check-page,
+body>main>.content>.form.step3>.terms-page,
+body>main>.content>.form.step3>.insert-userinfo-page,
+body>main>.content>.form.step3 > .text
+{
+    display: none;
+}
+/*약관동의 페이지*/
+
+body>main>.content>.form>.terms-page{
+    width: 22.5rem;
+
+    /*background-color: #FFCC00;*/
+
+
+}
+
+
+body>main>.content>.form>.terms-page>table>tbody>tr{
+
+    border: gray solid 0.0625rem;
+    color: gray;
+
+}
+body>main>.content>.form>.terms-page>table>tbody>tr>td>h5{
+    color: #E31134;
+}
+body>main>.content>.form>.terms-page>table>tbody>tr>td>label{
+    padding-right: 0.3125rem;
+}
+
+
+body >main>.content>.form>.terms-page> table>tbody>tr>td>label>input{
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.3125rem;
+
+    appearance: none;
+    cursor: pointer;
+
+    box-shadow: 0 0  0 0.0625rem  rgba(0,0,0,0.2);
+
+    border: solid rgba(0,0,0,0.4) 0.0625rem;
+}
+body >main>.content>.form>.terms-page> table>tbody>tr>td>label>input:checked{
+
+    background-color: rgba(0,0,0,0.2);
+
+    background-image: url("/resources/images/checkbox.jpg");
+    background-size: 100%;
+    box-shadow: 0 0  0  0.125rem  #0ea31a;
+    border-radius: 0.3125rem;
+
+
+}
+
+body >main>.content>.form>.terms-page> table>tbody>tr>td>.terms-text-button-shop,
+body >main>.content>.form>.terms-page> table>tbody>tr>td>.terms-text-button-user
+
+{
+    cursor: pointer;
+}
+
+
+
+
+
+
+body>main>.content>.form>.terms-page>table>tbody>.all-check-row{
+    border: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+body>main>.content>.form>.terms-page>table>tbody>.marketing-check-row{
+
+    border-bottom: none;
+
+}
+
+
+body>main>.content>.form>.terms-page>table>tbody>.receive-check-row{
+    border-top: none;
+}
+body>main>.content>.form>.terms-page>table>tbody>.receive-check-row>td{
+    padding-left: 1.25rem;
+}
+
+
+
+body>main>.content>.form>.terms-page>table>tbody>tr>td{
+    width:22.5rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+    padding: 0.625rem;
+}
+
+body>main>.content>.form>.terms-page>table>tbody>tr>td>label{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+
+
+/*이용약관 창*/
+body>main> .terms-content.visible{
+    position: fixed;
+    background-color: rgba(0,0,0,70%);
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    top:0;
+    left:0;
+    display: block;
+
+}
+
+
+
+body>main>.terms-content>.terms-text-container{
+
+    z-index: 15;
+
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+
+
+body>main>.terms-content>.terms-text-container>.terms-text{
+    width: 42.5rem;
+    height: 43.75rem;
+    overflow: auto ;
+
+    padding-left: 1.25rem;
+    background-color: white;
+
+    font-size: 0.875rem;
+    color: rgba(0,0,0,0.7);
+    display: block;
+}
+body>main>.terms-content>.terms-text-container>.terms-text>span{
+    display: block;
+}
+
+body>main>.terms-content,
+body>main>.terms-content>.terms-text-container>.terms-text {
+    display: none;
+}
+
+body>main>.terms-content>.terms-text-container>.terms-text.visible {
+    display: block;
+}
+
+
+body>main>.terms-content>.terms-text-container>.title-row{
+    /*background-color: red;*/
+
+    font-size: 1.25rem;
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    padding:1.25rem;
+
+    background-color: white;
+
+}
+body>main>.terms-content>.terms-text-container>div>.exiting-button
+{
+    cursor: pointer;
+}
+
+
+body>main>.terms-content>.terms-text-container>.title-row>.spring{
+    flex: 1;
+}
+
+
+
+body>main>.terms-content>.terms-text-container>.button-row>span{
+    background-color: gray;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    border: white 0.6875rem solid;
+    padding: 1rem;
+    color: white;
+}
+
+
+
+
+
+
+
+
+/*회원가입 페이지*/
+body > main > .content> .form.step > label>.next{
+    width: 40rem;
+}
+
+body>main>.content>form>.insert-userinfo-page{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    width: 40rem;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr{
+    border-top: rgba(0,0,0,0.2) solid 0.0625rem;
+    border-bottom: rgba(0,0,0,0.2) solid 0.0625rem;
+    padding: 1rem;
+
+
+}
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>th{
+    width: 8.75rem;
+    background-color: #f8f8f8;
+    font-weight: 400;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>td{
+
+    padding: 0.5rem;
+    width: 31.25rem;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>td> label > input{
+    height: 2.5rem;
+    width: 15.75rem;
+    padding: 0.5625rem;
+    /*display: block;*/
+    border:  rgba(0,0,0,0.2) solid 0.0625rem;
+    border-radius: 0.3125rem;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: stretch;
+
+
+}
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>.address-first{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>label:not(:first-of-type){
+    margin-top: 0.3125rem;
+
+    width: 100%;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>label:not(:first-of-type)>input{
+    width: 100%;
+}
+
+
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td> .address-first>input{
+
+    width: 4.75rem;
+    margin-right: 0.3125rem;
+    display: inline-block;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.birth-row>td>label>input{
+    width: 8.125rem;
+}
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>.id-row>td>label>input::placeholder {
+    font-weight: 550;
+    font-size: 0.9375rem;
+    color: rgb(0,0,0,0.3);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>.password-row>td>label>input::placeholder {
+    /*font-weight: 40;*/
+    font-size: 0.6875rem;
+    color: rgb(0,0,0,0.7);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+
+
+
+
+/*주소 입력창*/
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,70%);
+    position: fixed;
+    display: none;
+    z-index: 10;
+}
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address.visible{
+
+    display: block;
+}
+
+
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address>.dialog{
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    max-width: 27.5rem;
+    max-height: 30rem;
+    background-color: rgb(255,255,255);
+    position: absolute;
+    transform: translate(-50% ,-50%);
+}
+
+
+/*회원가입 완료*/
+@media screen and (max-width : 87.5rem) {
+    body>main{
+        width: 100%;
+    }
+    body>main>.content>form>.insert-userinfo-page>table>tbody>tr>td{
+        width: unset;
+    }
+
+    body>main>.terms-content>.terms-text-container>.terms-text{
+
+        width: 15rem;
+        height: 15rem;
+    }
+
+}

@@ -1,0 +1,414 @@
+/*@charset "UTF-8";*/
+
+body > main > .content{
+
+    width: 22.5rem;
+    padding-bottom: 3.125rem;
+}
+
+
+
+
+body > main > .content> .form{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+    width:100%;
+    /*background-color: ivory;*/
+}
+
+td,input,th,tr{
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+    border: none;
+
+}
+
+table{
+    /*border-collapse: separate;*/
+    border-spacing: 0 0;
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.625rem;
+}
+body > main > .content> .form >.title{
+
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333333;
+    padding:  4.0625rem 0 2rem 0;
+    /*background-color: red;*/
+    letter-spacing: -0.0625rem;
+}
+body > main > .content> .form > .title2{
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+
+    text-shadow: 0 0 0.0625rem rgba(0,0,0,0.7);
+
+}
+body > main > .content> .form > .title2>.icon{
+    color: #ee3400;
+    border: #FFCC00 0.1875rem solid;
+    border-radius: 999rem;
+}
+
+
+
+
+body >main>.content>.form> table>tbody>tr>td{
+    /*align-items: stretch;*/
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+
+
+
+body >main>.content>.form> table>tbody>.recover-mode-row>td{
+    margin-bottom: 2.5rem;
+
+}
+body >main>.content>.form> table>tbody>.recover-mode-row>td>label>input{
+
+    cursor: pointer;
+    width: 11.25rem;
+    height: 2.5rem;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 1rem;
+
+}
+
+
+
+
+body >main>.content>.form.recover-mode-id> table>tbody>.recover-mode-row>td>label>.recover-id{
+    border-top: rgba(0,0,0,0.5) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.5) solid 0.0625rem;
+    border-right: rgba(0,0,0,0.5) solid 0.0625rem;
+    background-color: white;
+    cursor: unset;
+}
+body >main>.content>.form.recover-mode-id> table>tbody>.recover-mode-row>td>label>.recover-password{
+    border-top:    rgba(0,0,0,0.2) solid 0.0625rem;
+    border-right:  rgba(0,0,0,0.2) solid 0.0625rem;
+    border-bottom: rgba(0,0,0,0.5)  solid 0.0625rem;
+    color: rgba(0,0,0,0.5);
+
+}
+
+body >main>.content>.form.recover-mode-password> table>tbody>.recover-mode-row>td>label>.recover-id{
+    border-top:    rgba(0,0,0,0.2) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.2) solid 0.0625rem;
+    border-bottom: rgba(0,0,0,0.5)  solid 0.0625rem;
+    color: rgba(0,0,0,0.5);
+
+}
+body >main>.content>.form.recover-mode-password> table>tbody>.recover-mode-row>td>label>.recover-password{
+
+
+
+    border-top: rgba(0,0,0,0.5) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.5) solid 0.0625rem;
+    border-right: rgba(0,0,0,0.5) solid 0.0625rem;
+
+    background-color: white;
+    cursor: unset;
+
+
+}
+
+
+
+
+main> .content >.form>table>tbody>.icon-row>td{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+}
+main> .content >.form>table>tbody>.icon-row>td>.bar-container{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+
+}
+main> .content >.form>table>tbody>.icon-row>td>.bar-container>.bar-icon{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    height: 1rem;
+
+    width: 2rem;
+    margin:0 0.625rem  0 0.625rem;
+    overflow: hidden;
+    user-select: none;
+}
+
+
+
+main> .content >.form>table>tbody>.icon-row>td>.bar-container>.bar-icon>span{
+    font-size: 0.2rem;
+    /*height: 100%;*/
+    color: gray;
+
+    animation-name: ani;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes ani {
+    from{
+
+        translate: none;
+
+    }
+    to{
+
+        translate:  0.4375rem 0;
+
+    }
+
+
+}
+
+
+main> .content >.form>table>tbody>.icon-row>td>.bar-container>.row-title{
+    font-size: 1.3125rem;
+
+}
+main> .content >.form>table>tbody>.icon-row>td>.row-title2{
+    font-size: 0.8125rem;
+    padding-top: 0.75rem;
+    color: rgba(0,0,0,0.4);
+    font-weight: 600;
+}
+
+
+
+main> .content >.form>table>tbody>.icon-row>td>.icon-container{
+
+    padding: 1.875rem;
+    font-size: 3.75rem;
+}
+
+
+
+main> .content >.form>table>tbody>.data-row
+{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+    height: 3rem;
+
+}
+
+main> .content >.form>table>tbody>.name-row{
+    border-top: 0.0625rem solid rgba(0,0,0,0.2);
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+
+}
+
+
+
+main> .content >.form>table>tbody>.id-row{
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+    display: none;
+
+}
+main> .content >.form.recover-mode-password>table>tbody>.id-row{
+    display: flex;
+}
+
+
+main> .content >.form>table>tbody>.email-row{
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+
+}
+
+
+
+
+main> .content >.form>table>tbody>.data-row>th{
+
+
+
+    width: 100%;
+    height: 3rem;
+
+    background-color: rgba(0,0,0,0.05);
+    font-size: 1rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+
+
+}
+
+
+main> .content >.form>table>tbody>.data-row>td>label{
+    padding: 0.5rem;
+
+    width: 100%;
+    height: 50%;
+
+}
+
+
+
+main> .content >.form>table>tbody>.data-row>td>label>input{
+    width: 17.0625rem;
+    height: 2rem;
+
+    border: 0.0625rem solid rgba(0,0,0,0.2);
+    border-radius: 0.1875rem;
+
+    color: rgba(0,0,0,0.6);
+    padding:  0 0.5625rem 0 0.5625rem;
+}
+
+main> .content >.form>table>tbody>.result-row{
+    display: none;
+
+
+}
+
+
+main> .content >.form>table>tbody>.result-row.visible{
+    display: block;
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+}
+
+
+
+main> .content >.form>table>tbody>.result-row>td{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.05);
+    text-align: center;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+
+
+}
+main> .content >.form>table>tbody>.result-row>td>span>.result-id{
+    color: #FFCC00;
+    font-size: 1.125rem;
+    background-color: black;
+}
+main> .content >.form>table>tbody>.result-row>td>.no-select{
+    user-select: none;
+}
+
+main> .content >.form>table>tbody>.user-id,
+main> .content >.form>table>tbody>.password-check-row
+{
+    border-top: 0.0625rem solid rgba(0,0,0,0.2);
+
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+    display: none;
+
+}
+main> .content >.form>table>tbody>.password-row{
+    display: none;
+}
+
+
+
+
+
+
+body>main>.content>.form> table>tfoot>tr>td>label> input
+{
+
+    height: 3rem;
+    width: 100%;
+    background-color: #E31134;
+    border: unset;
+
+    color: white;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 450;
+    font-family: inherit;
+
+    margin-top: 1.25rem;
+}
+body>main>.content>.form> table>tfoot>tr>td>label> input:hover{
+    background-color: #FFCC00;
+    transition-duration: 500ms;
+}
+
+
+body>main>.content>.form> table>tfoot>.result-button-row.visible,
+body>main>.content>.form> table>tfoot>.next-button-row.visible,
+body>main>.content>.form> table>tbody>.icon-row.visible
+
+
+{
+    display:  table-row;
+}
+body>main>.content>.form> table>tbody>.icon-row,
+body>main>.content>.form> table>tfoot>.result-button-row,
+body>main>.content>.form> table>tfoot>.next-button-row,
+main> .content >.form>table>tbody>.password-row,
+body>main>.content>.form> table>tbody>.name-row.disabled,
+body>main>.content>.form> table>tbody>.id-row.disabled,
+body>main>.content>.form> table>tbody>.email-row.disabled
+
+{
+    display: none;
+}
+
+
+main> .content >.form>table>tbody>.user-id.visible,
+main> .content >.form>table>tbody>.password-check-row.visible,
+main> .content >.form>table>tbody>.password-row.visible{
+    display: flex;
+}
+
+
+
+body>main>.content>.form> table>tfoot>.result-button-row>td{
+
+    margin-top: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+body>main>.content>.form> table>tfoot>.result-button-row>td>label{
+    width: 100%;
+}
+body>main>.content>.form> table>tfoot>.result-button-row>td>label>.gray-button{
+    background-color: rgba(0,0,0,0.4);
+
+}
+body>main>.content>.form> table>tfoot>.result-button-row>td>label>.gray-button:hover{
+    background-color: black;
+}

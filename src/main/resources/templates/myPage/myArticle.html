@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BBQ몰-마이페이지</title>
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/board.css}">
+
+    <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myShopping.css}">
+    <script defer th:src="@{/myPage/resources/scripts/myArticle.js}"></script>
+
+    <script th:if="${session.user==null}">
+
+        alert("로그인 해주세요.");
+        window.location.href='/member/login';
+
+
+    </script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+
+<main >
+    <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
+    <input hidden id="bid" th:value="${bid}">
+    <div class="content notice" th:if="${session.user!=null && bid!='bp'}">
+        <div class="title-container">
+            <h1 th:text="${bid=='pi'? '상품문의':'상품후기' }">상품문의</h1>
+        </div>
+
+        <table class="content-table">
+            <thead>
+            <tr>
+                <td><h3 class="number">번호</h3></td>
+                <td><h3 class="board-id">분류</h3></td>
+                <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="written-on">등록일</h3></td>
+                <td><h3 class="view-count">조회</h3></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="article" th:each="article, i: ${articles}" th:with="pi=''">
+                <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
+                <td>
+                    <h3 class="number" th:text="${i.size - i.index}">-</h3>
+                </td>
+
+                <td>
+                    <h3 class="board-id" th:text="${article.getText()}">-</h3>
+                </td>
+
+                <input class="is-new" hidden th:value="${#dates.format(article.getModifiedOn(),'yyyyMMdd')}">
+
+
+                <td class="content-title"><a th:href="@{/board/readNotice (bid=pi,nid=${article.getIndex()})}"><h3
+                        th:text="${article.getTitle()}">-</h3>
+                    <!--                        <img  alt="new" class="is-new-icon new"-->
+                    <!--                             th:src="@{/resources/images/icon_new.gif}">-->
+                    <img alt="new"
+                         th:if="${article.isNew()}"
+                         th:src="@{/resources/images/icon_new.gif}">
+
+
+                    <img alt="hot" th:if="${article.getView()>0}"
+                         th:src="@{/resources/images/icon_hot.gif}">
+
+
+                </a></td>
+
+
+                <td>
+                    <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
+                        2022.52.22</h3>
+                </td>
+                <td>
+                    <h3 class="view-count" th:text="${article.getView()}">1</h3>
+                </td>
+            </tr>
+
+
+
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <!--                            with는 변수선언이라고 보면된다.-->
+                    <div class="page-container"
+                         th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+
+                        <a class="page"
+                           th:if="${paging.requestPage >1}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angles-left"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if="${paging.requestPage >1}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage -1).build().toUriString()}}">
+
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+
+                        <!--                                시퀀스를하면 정수 시작부터 정수끝을 배열로 돌려준다.-->
+                        <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                           th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
+                           th:text="${page}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}"
+
+                        >
+                            <!--                                    클릭시 값을 페이지라고 적혀ㅓ잇는곳을 페이지값으로 바꾸겟다 검색어에서도 사용하기위해 빌드쓴다-->
+
+                        </a>
+
+
+                        <a class="page"
+                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage +1).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angle-right"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+
+                    </div>
+                </td>
+
+            </tr>
+
+
+            </tfoot>
+
+        </table>
+        <div class="write-notice-button">
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">문의작성</a>
+        </div>
+
+    </div>
+
+    <div class="content bp" th:if="${session.user!=null &&bid=='bp'}">
+        <div class="title-container">
+            <h1>나의 1:1문의</h1>
+        </div>
+
+        <table class="content-table">
+            <thead>
+            <tr>
+                <td><h3 class="number">번호</h3></td>
+                <td><h3 class="state">상태</h3></td>
+                <td><h3 class="board-id">분류</h3></td>
+                <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="id">문의자</h3></td>
+                <td><h3 class="written-on">등록일</h3></td>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr class="article" th:each="bpArticle, i: ${bpArticles}">
+                <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
+                <td>
+                    <h3 class="number" th:text="${i.size - i.index }">-</h3>
+                </td>
+
+                <td>
+
+                    <h3 th:text="${bpArticle.getCommentCount()<=0? '답변대기':'답변완료'}">답변전</h3>
+                </td>
+
+                <td>
+                    <h3 class="board-id" th:text="${bpArticle.getText()}">-</h3>
+                </td>
+
+
+
+                <td class="content-title">
+                    <a th:href="@{/board/readNotice (bid=bpArticle,bbid=${bpArticle.getIndex()})}">
+                        <h3
+                                th:text="${bpArticle.getTitle()}">-</h3>
+
+                    </a></td>
+
+                <td>
+                    <h3 class="id"  th:text="${bpArticle.getId()}" >성함</h3>
+                </td>
+
+
+                <td>
+                    <h3 class="written-on" th:text="${#dates.format(bpArticle.getWrittenOn(),'yyyy.MM.dd')}">
+                        2022.52.22</h3>
+                </td>
+
+            </tr>
+
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <!--                            with는 변수선언이라고 보면된다.-->
+                    <div class="page-container"
+                         th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+
+                        <a class="page"
+                           th:if="${paging.requestPage >2}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angles-left"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if="${paging.requestPage >1}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage -1).build().toUriString()}}">
+
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+
+                        <!--                                시퀀스를하면 정수 시작부터 정수끝을 배열로 돌려준다.-->
+                        <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                           th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
+                           th:text="${page}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}"
+
+                        >
+                            <!--                                    클릭시 값을 페이지라고 적혀ㅓ잇는곳을 페이지값으로 바꾸겟다 검색어에서도 사용하기위해 빌드쓴다-->
+
+                        </a>
+
+
+                        <a class="page"
+                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage +1).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angle-right"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if="${  paging.maxPage - paging.requestPage >1  }"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+
+                    </div>
+                </td>
+
+            </tr>
+
+
+            </tfoot>
+
+        </table>
+
+
+        <div class="write-notice-button">
+            <a th:href="@{/board/writeBp}">대량구매 문의</a>
+        </div>
+    </div>
+
+
+
+
+
+
+</main>
+
+
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>
+

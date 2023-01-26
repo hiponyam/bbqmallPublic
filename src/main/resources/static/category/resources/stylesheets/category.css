@@ -1,0 +1,223 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+
+* {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+
+.search-filter-wrap > .search-filter > .search-list {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+body > main {
+    width: 80rem;
+}
+
+.search-list > .li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font: 0.9375rem "Pretendard Variable";
+}
+
+
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    line-height: normal;
+    position: relative;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li + .li {
+    border-left: 0.125rem solid rgb(213, 216, 220);
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li > .active > .btn-container > .button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
+    border-bottom: 0.0125rem solid rgb(213, 216, 220);
+}
+
+.product-container {
+    display: grid;
+    gap: 2rem 2.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    list-style-type: none;
+
+    margin-top: 3rem;
+    padding: unset;
+
+}
+
+.product-container > .products:hover {
+    font-weight: 500;
+}
+
+.product-container > .products {
+    /*align-items : stretch;*/
+    /*display : grid;*/
+    /*flex-direction : row;*/
+    /*justify-content : center;*/
+}
+
+.product-container > .products > a > img {
+    width: 100%;
+    height: 18.125rem;
+    display: inline-block;
+}
+
+.product-container > .products > .product-box {
+
+    padding-top: 1rem;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.product-container > .products > .product-box > .title > .comment {
+    /*font-size : 1.25rem;*/
+
+    font-size: 1.3125rem;
+    margin-bottom: 1rem;
+    color: black;
+    min-height: 2.625rem;
+}
+
+
+.product-container > .products > .product-box > .title > .sale,
+.product-container > .products > .product-box > .title > .percent {
+    font-size: 1.5rem;
+    color: #CF152D;
+}
+
+.product-container > .products > .product-box > .title > .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+
+}
+
+.product-container > .products > .product-box > .title > .won {
+    color: black;
+}
+
+
+.product-container > .products > .product-box > .title > .base-price {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+body > main > .swiper > div > .catalog-page > .page-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    color: black;
+}
+
+body > main > .swiper > div > .catalog-page > .page-container > .page {
+    /*background-color: rebeccapurple;*/
+    width: 2rem;
+    height: 2rem;
+    /*padding: 0.4rem 1rem 0.4rem 1rem;*/
+    color: #333333;
+    border: 0.0625rem solid rgba(0, 0, 0, 0.15);
+
+
+    border-radius: 0.1rem;
+    font-size: 0.75rem;
+    /*display: flex;*/
+    /*align-items: center;*/
+    padding: unset;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 0.1rem;
+
+}
+
+body > main > .swiper > div > .catalog-page > .page-container > .page.selected {
+    border: 0.0625rem solid rgba(0, 0, 0, 0.9);
+    user-select: none;
+
+}
+
+
+body > main > .swiper > div > .catalog-page > .page-container > .page:hover {
+
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 0.0625rem solid rgba(0, 0, 0, 0.2);
+}
+
+
+@media screen and (max-width: 100rem) {
+    /* 최대크기가 100rem 이하가 될때 적용될 것들을 적어넣으면 됨 */
+    .product-container {
+        max-width: 70rem;
+    }
+}
+
+@media screen and (max-width: 87.5rem) {
+    .product-container {
+        max-width: 50rem;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        /*min-height: 20rem;*/
+        /*max-height: 20rem;*/
+
+        /*width: 100%;*/
+    }
+
+
+}
+
+@media screen and (max-width: 80rem) {
+
+    body > main {
+        width: 100%;
+    }
+
+    /*.product-container {*/
+    /*    max-width : 50rem;*/
+    /*}*/
+    /*.product-container > .products {*/
+    /*    gap : 1rem 1.25rem;*/
+    /*}*/
+    /*.product-container > .products + .products {*/
+    /*    gap : 1.25rem 4.25rem;*/
+    /*}*/
+}
+
+
+@media screen and (max-width: 53.75rem) {
+
+    .product-container {
+        max-width: calc(97vw);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        /*min-height: 20rem;*/
+        /*max-height: 20rem;*/
+
+    }
+
+}

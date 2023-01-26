@@ -1,0 +1,237 @@
+body>main{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    font-family: inherit;
+    width: 80rem;
+}
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 5rem;
+    padding-bottom: 6.25rem;
+
+}
+
+body> main> .content>.title-container{
+
+    padding-top: 0;
+    padding-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: -0.125rem;
+    font-weight: 700;
+}
+body>main>.content>form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+body>main>.content>form>input{
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: inherit;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
+body>main>.content>form>input[type="text"]{
+
+    width: 25rem;
+    height: 3rem;
+    margin-right: 0.5rem;
+    border: rgba(0,0,0,0.3) solid 0.0625rem;
+    border-radius: 0.2rem;
+
+}
+body>main>.content>form>input[type="text"]:focus{
+    border: black solid 0.0625rem;
+
+}
+
+
+body>main>.content>form>input[type="submit"]{
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+
+}
+body>main>.content>.no-result{
+    display: flex;
+    justify-content: center;
+    height: 30rem;
+    align-items: center;
+    font-size: 2rem;
+    color: rgba(0,0,0,0.4);
+}
+
+
+
+
+
+body>main>.content>.product-container {
+    display: grid;
+    gap: 2rem 2.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    /*list-style-type: none;*/
+
+    margin-top: 3rem;
+    padding: unset;
+
+}
+
+
+
+
+body>main>.content>.product-container > .products >a > img {
+    width: 100%;
+    height : 18.125rem;
+    display: inline-block;
+}
+body>main>.content>.product-container > .products > .product-box {
+
+    padding-top: 1rem;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+}
+
+
+body>main>.content>.product-container > .products > .product-box > .title > .comment {
+    /*font-size : 1.25rem;*/
+
+    font-size: 1.3125rem;
+    margin-bottom: 1rem;
+    color: black;
+    min-height: 2.625rem;
+}
+
+
+
+
+body>main>.content>.product-container > .products > .product-box > .title > .sale,
+body>main>.content>.product-container > .products > .product-box > .title > .percent {
+    font-size:1.5rem;
+    color : #CF152D;
+}
+
+body>main>.content>.product-container > .products > .product-box > .title > .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+
+}
+body>main>.content>.product-container > .products > .product-box > .title > .won {
+    color: black;
+}
+
+
+body>main>.content>.product-container > .products > .product-box > .title > .base-price {
+    text-decoration : line-through;
+    color: rgba(0,0,0,0.5);
+}
+
+body>main>.content>.page-container{
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    color: black;
+}
+
+body>main>.content>.page-container>.page{
+    width: 2rem;
+    height: 2rem;
+    /*padding: 0.4rem 1rem 0.4rem 1rem;*/
+    color: #333333;
+    border: 0.0625rem solid rgba(0,0,0,0.15);
+
+
+    border-radius: 0.1rem;
+    font-size: 0.75rem;
+    /*display: flex;*/
+    /*align-items: center;*/
+    padding: unset;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 0.1rem;
+
+}
+body>main>.content>.page-container>.page.selected{
+    border:0.0625rem  solid rgba(0,0,0,0.9);
+    user-select: none;
+
+}
+
+
+
+body>main>.content>.page-container>.page:hover{
+
+    background-color: rgba(0,0,0,0.1);
+    border: 0.0625rem solid rgba(0,0,0,0.2);
+}
+
+
+
+
+
+@media screen and (max-width : 87.5rem) {
+
+    body>main{
+        width: 100%;
+        padding: unset;
+    }
+
+    body > main > .content {
+        padding-top: 0.5rem;
+    }
+
+    body > main > .content > .product-container {
+
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        /*min-height: 20rem;*/
+        /*max-height: 20rem;*/
+
+        width: 100%;
+    }
+
+}
+
+
+
+
+
+
+@media screen and (max-width : 53.75rem) {
+    html{
+        overflow-x: hidden;
+    }
+    body > main > .content > .product-container {
+
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        /*min-height: 20rem;*/
+        /*max-height: 20rem;*/
+
+        width: 100%;
+    }
+
+
+}

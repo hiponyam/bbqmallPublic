@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'BBQ몰 상품관리('+statusLookup.length+')'}"> </title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
+    <!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+
+    <script th:if="${session.user==null || !session.user.isAdmin()}">
+        alert("없는 페이지입니다.");//일반인에게 어드민 페이지를 숨긴다.
+        window.location.href=`/`;
+    </script>
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="cs-center">
+
+    <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
+    <div class="content">
+
+
+        <ul>
+            <li>
+
+                <a th:href="@{/admin/create}">
+                    <i class="fa-solid fa-plus"></i>
+                    상품등록
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/read}">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    상품조회
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/read}">
+                    <i class="fa-solid fa-file-pen"></i>
+                    상품수정
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/read}">
+                    <i class="fa-solid fa-trash-can"></i>
+                    상품삭제
+                </a>
+
+            </li>
+
+
+
+
+        </ul>
+
+        <div class="lookup">
+            <div class="title-row">
+                <h1 class="title">상품관리 HISTORY</h1> <span th:text="${'(최근 3일 : '+statusLookup.length+'건)'}"></span><i></i>
+                <span class="spring"></span>
+                <a th:href="@{/admin/}" class="more">전체내역</a>/
+                <a th:href="@{/admin/ (status=create)}" class="more">등록내역</a>/
+                <a th:href="@{/admin/ (status=update)}" class="more">수정내역</a>/
+                <a th:href="@{/admin/ (status=delete)}" class="more">삭제내역</a>
+            </div>
+            <div class="bar"></div>
+            <ul class="status-ul">
+
+                <li class="status" th:each="status : ${statusLookup}">
+                    <div>
+                        <span th:text="${status.getStatus().charAt(0)}">C</span>
+
+
+                        <i class="small-text" th:text="${status.getStatusText()}">상태</i>
+                        <span class="small-text" th:text="${status.getProductIndex()}">-</span>
+                        <span class="small-text" th:text="${status.getText()}">234</span>
+
+                        <span class="spring"></span>
+
+                        <span class="small-text" th:text="${#dates.format(status.getOccurredTime(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
+
+
+
+                    </div>
+                </li>
+
+
+
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>

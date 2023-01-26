@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiponya.bbqmall.mappers.IBbsMapper">
+
+
+    <select id="selectNoticeBoardId" resultType="com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+
+        FROM `bbq_bbs`.`notice_boards`
+        where `id` = #{id}
+        LIMIT 1;
+
+
+    </select>
+
+    <select id="selectBpBoardById" resultType="com.hiponya.bbqmall.entities.bbs.BpBoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+
+        FROM `bbq_bbs`.`bp_boards`
+        where `id` = #{id}
+        LIMIT 1;
+
+
+    </select>
+
+
+    <select id="selectNoticeCountByNoticeBoardId" resultType="int">
+
+        SELECT COUNT(0)
+        FROM `bbq_bbs`.`notice` AS `notice`
+
+        WHERE (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+
+        <if test='boardId != null and keyword != null'>
+            AND `board_id` = #{boardId}
+
+        </if>
+
+        <if test='boardId != null and keyword == null'>
+            #             WHERE `board_id` = #{boardId}
+
+        </if>
+
+        <if test='boardId == null and keyword != null'>
+            AND `board_id` != 'qna'
+            AND `board_id` != 'pi'
+            AND `board_id` != 'pr'
+        </if>
+        <if test='qid!=null'>
+            AND `qna_board_id` = 'qna'
+        </if>
+
+
+    </select>
+
+    <select id="selectBpArticleCountByBpBoardId" resultType="int">
+
+        SELECT COUNT(0),
+        `bp_article`.`bp_board_id` AS `bpBoardId`
+
+        FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+        LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_article`.`bp_board_id` = `bp_board`.`id`
+        WHERE
+
+        (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`bp_board`.`id`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`company`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`bp_article`.`id`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+
+        <if test='bpBoardId != null and bpBoardId != "0"'>
+            AND `bp_board_id` = #{bpBoardId}
+
+        </if>
+
+
+
+    </select>
+
+    <select id="selectAnnounceNotice" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+               `notice`.`board_id` AS `boardId`,
+               `notice`.`title` AS `title`,
+               `notice_board`.`text` AS `text`,
+               `notice`.`content`     AS `content`,
+               `notice`.`board_id`    AS `boardId`,
+               `notice`.`view` AS `view`,
+               `notice`.`important_flag` AS `isImportant`,
+               `notice`.`written_on` AS `writtenOn`,
+               `notice`.`modified_on` AS `modifiedOn`,
+               `notice`.`new_flag` AS `isNew`
+        FROM `bbq_bbs`.`notice` AS `notice`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`.`id` = `notice`.`board_id`
+        WHERE important_flag =1;
+
+
+    </select>
+
+    <select id="selectNoticeByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+        `notice`.`id` AS `id`,
+
+        `notice`.`board_id` AS `boardId`,
+        `notice`.`title` AS `title`,
+        `notice_board`.`text` AS `text`,
+        `notice`.`content`     AS `content`,
+        `notice`.`board_id`    AS `boardId`,
+        `notice`.`view` AS `view`,
+        `notice`.`important_flag` AS `isImportant`,
+        `notice`.`written_on` AS `writtenOn`,
+        `notice`.`modified_on` AS `modifiedOn`,
+        `notice`.`new_flag` AS `isNew`,
+        `notice`.`qna_board_id` AS `qnaBoardId`,
+        `notice`.`comment_count` AS `commentCount`
+        FROM `bbq_bbs`.`notice` AS `notice`
+        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`.`id` = `notice`.`board_id`
+        WHERE
+        (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+        <if test='boardId != null  and keyword != null'>
+            AND `board_id` = #{boardId}
+
+        </if>
+
+        <if test='boardId != null and keyword == null'>
+
+        </if>
+
+        <if test='boardId == null'>
+            AND `board_id` != 'qna'
+            AND `board_id` != 'pi'
+            AND `board_id` != 'pr'
+
+        </if>
+
+        <if test='qid!=null and qid!= "" '>
+            AND `qna_board_id`= #{qid}
+        </if>
+
+
+
+
+
+        GROUP BY `notice`.`index`
+        ORDER BY `notice`.`index` DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+
+    </select>
+
+    <select id="selectMyNoticeById" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+               `notice`.`id` AS `id`,
+               `notice`.`board_id` AS `boardId`,
+               `notice`.`title` AS `title`,
+               `notice_board`.`text` AS `text`,
+               `notice`.`content`     AS `content`,
+               `notice`.`board_id`    AS `boardId`,
+               `notice`.`view` AS `view`,
+               `notice`.`important_flag` AS `isImportant`,
+               `notice`.`written_on` AS `writtenOn`,
+               `notice`.`modified_on` AS `modifiedOn`,
+               `notice`.`new_flag` AS `isNew`,
+               `notice`.`qna_board_id` AS `qnaBoardId`
+        FROM `bbq_bbs`.`notice` AS `notice`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on  `notice_board`.`id` = `notice`.`board_id`
+        WHERE  `board_id` = #{boardId} AND `notice`.`id` = #{id}
+
+        GROUP BY `notice`.`index`
+        ORDER BY `notice`.`index` DESC
+        LIMIT ${limit}
+            OFFSET ${offset}
+
+    </select>
+
+
+    <select id="selectBpArticleByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
+        SELECT
+        `bp_article`.`index` AS `index`,
+        `bp_article`.`id` AS `id`,
+        `bp_article`.`bp_board_id` AS `bpBoardId`,
+        `bp_article`.`name` AS `name`,
+        `bp_article`.`email` AS `email`,
+        `bp_article`.`contact` AS `contact`,
+        `bp_article`.`company` AS `company`,
+        `bp_article`.`request_date` AS `requestDate`,
+        `bp_article`.`product_info` AS `productInfo`,
+
+        `bp_article`.`request_price` AS `requestPrice`,
+        `bp_article`.`pay` AS `pay`,
+        `bp_article`.`request_evidence` AS `requestEvidence`,
+        `bp_article`.`reply_sms` AS `replySms`,
+        `bp_article`.`reply_email` AS `replyEmaiil`,
+        `bp_article`.`title` AS `title`,
+        `bp_article`.`content` AS `content`,
+        `bp_article`.`written_on` AS `writtenOn`,
+        `bp_article`.`modified_on` AS `modifiedOn`,
+        `bp_article`.`comment_count` AS `commentCount`,
+        `bp_board`.`text` AS `text`
+
+
+
+        FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+        LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_board_id` = `bp_board`.`id`
+        WHERE
+        (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`bp_board`.`id`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`company`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`bp_article`.`id`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+        <if test='bpBoardId != null  and bpBoardId != "0"'>
+            AND `bp_board_id` = #{bpBoardId}
+
+        </if>
+
+
+        GROUP BY `bp_article`.`index`
+        ORDER BY `bp_article`.`index` DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+
+    </select>
+
+    <select id="selectBpArticleByBoardIdJustOne" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
+        SELECT
+            `bp_article`.`index` AS `index`,
+            `bp_article`.`id` AS `id`,
+            `bp_article`.`bp_board_id` AS `bpBoardId`,
+            `bp_article`.`name` AS `name`,
+            `bp_article`.`email` AS `email`,
+            `bp_article`.`contact` AS `contact`,
+            `bp_article`.`company` AS `company`,
+            `bp_article`.`request_date` AS `requestDate`,
+            `bp_article`.`product_info` AS `productInfo`,
+            `bp_article`.`request_price` AS `requestPrice`,
+            `bp_article`.`pay` AS `pay`,
+            `bp_article`.`request_evidence` AS `requestEvidence`,
+            `bp_article`.`reply_sms` AS `replySms`,
+            `bp_article`.`reply_email` AS `replyEmaiil`,
+            `bp_article`.`title` AS `title`,
+            `bp_article`.`content` AS `content`,
+            `bp_article`.`written_on` AS `writtenOn`,
+            `bp_article`.`modified_on` AS `modifiedOn`,
+            `bp_article`.`comment_count` AS `commentCount`,
+            `bp_board`.`text` AS `text`
+
+
+
+        FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+                 LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_board_id` = `bp_board`.`id`
+        WHERE `index` = #{bpBoardId}
+        LIMIT 1
+    </select>
+
+
+    <select id="selectBpArticleById" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
+        SELECT
+            `bp_article`.`index` AS `index`,
+            `bp_article`.`id` AS `id`,
+            `bp_article`.`bp_board_id` AS `bpBoardId`,
+            `bp_article`.`name` AS `name`,
+            `bp_article`.`email` AS `email`,
+            `bp_article`.`contact` AS `contact`,
+            `bp_article`.`company` AS `company`,
+            `bp_article`.`request_date` AS `requestDate`,
+            `bp_article`.`product_info` AS `productInfo`,
+
+            `bp_article`.`request_price` AS `requestPrice`,
+            `bp_article`.`pay` AS `pay`,
+            `bp_article`.`request_evidence` AS `requestEvidence`,
+            `bp_article`.`reply_sms` AS `replySms`,
+            `bp_article`.`reply_email` AS `replyEmaiil`,
+            `bp_article`.`title` AS `title`,
+            `bp_article`.`content` AS `content`,
+            `bp_article`.`written_on` AS `writtenOn`,
+            `bp_article`.`modified_on` AS `modifiedOn`,
+            `bp_article`.`comment_count` AS `commentCount`,
+            `bp_board`.`text` AS `text`
+
+
+
+        FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+                 LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_board_id` = `bp_board`.`id`
+        WHERE `bp_article`.`id` = #{id}
+        GROUP BY `bp_article`.`index`
+        ORDER BY `bp_article`.`index` DESC
+        LIMIT ${limit}
+            OFFSET ${offset}
+
+    </select>
+
+
+    <select id="selectNoticeByIndex" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `index`                AS `index`,
+               `notice_board`.`text`  AS `text`,
+               `notice`.`id` AS `id`,
+               `notice`.`board_id`    AS `boardId`,
+               `notice`.`title`       AS `title`,
+               `notice`.`important_flag` AS `isImportant`,
+               `notice`.`content`     AS `content`,
+               `notice`.`view`        AS `view`,
+               `notice`.`written_on`  AS `writtenOn`,
+               `notice`.`modified_on` AS `modifiedOn`,
+               `notice`.`new_flag` AS `isNew`,
+               `notice`.`comment_count` AS `commentCount`
+
+        FROM `bbq_bbs`.`notice` AS `notice`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`. `id` = `notice`.`board_id`
+        WHERE `index` = #{index}
+
+        LIMIT 1;
+
+
+    </select>
+
+
+    <select id="selectAdminCommentByIndex" resultType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `article_index` = #{articleIndex}
+
+    </select>
+
+    <select id="selectPiCommentByIndex" resultType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`pi_comments`
+        WHERE `article_index` = #{articleIndex}
+
+    </select>
+
+
+
+    <select id="selectAdminCommentByIndexJustOne" resultType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+
+    </select>
+
+
+    <select id="selectPiCommentByIndexJustOne" resultType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`pi_comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+
+    </select>
+
+
+    <insert id="insertNotice"
+            useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+        INSERT INTO `bbq_bbs`.`notice` ( `board_id`,`id`,  `title`, `content`, `view`, `important_flag`
+                                       , `written_on`, `modified_on`,`expiration_date`)
+        VALUES ( #{boardId},#{id}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
+               , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)), #{expirationDate})
+
+
+    </insert>
+    <insert id="insertBpArticle"
+            useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+        INSERT INTO `bbq_bbs`.`bp_articles` ( `id`, `bp_board_id`, `name`, `email`, `contact`, `company`, `request_date`,`product_info`,
+                                              `request_price`, `pay`, `request_evidence`, `reply_sms`, `reply_email`, `title`,
+                                              `content`, `written_on`, `modified_on`)
+        VALUES (#{id}, #{bpBoardId},#{name},#{email},#{contact},#{company},#{requestDate},#{productInfo}, #{requestPrice},#{pay},  #{requestEvidence}, #{replySms}, #{replyEmail},
+                #{title},#{content}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+
+    </insert>
+
+
+
+
+    <insert id="insertImage" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
+        INSERT INTO `bbq_bbs`.`images` (`file_name`, `file_mime`, `data`)
+        VALUES (#{fileName}, #{fileMime}, #{data})
+
+
+    </insert>
+
+    <insert id="insertAdminComment" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+
+        INSERT INTO `bbq_bbs`.`admin_comments`( `article_index`, `content`, `written_on`, `modified_on`)
+        VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+    </insert>
+
+    <insert id="insertPiComment" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+
+        INSERT INTO `bbq_bbs`.`pi_comments`( `article_index`, `content`, `written_on`, `modified_on`)
+        VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+    </insert>
+
+
+    <select id="selectImageByIndex" resultType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
+
+        SELECT `index`     AS `index`,
+               `file_name` AS `fileName`,
+               `file_mime` AS `fileMime`,
+               `data`      AS `data`
+
+        FROM `bbq_bbs`.`images`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </select>
+
+    <select id="selectAnswers" resultType="com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity">
+
+        SELECT `index`     AS `index`,
+               `question_index` AS `questionIndex`,
+               `content` AS `content`
+
+        FROM `bbq_bbs`.`qna_answers`
+
+
+    </select>
+
+    <update id="updateNotice" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+
+        UPDATE `bbq_bbs`.`notice`
+        SET
+
+            `board_id`    = #{boardId},
+            `id` = #{id},
+            `title`       = #{title},
+            `content`     = #{content},
+            `view`        = #{view},
+            `important_flag`        = IFNULL(#{isImportant}, DEFAULT(`important_flag`)),
+            `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)),
+            `comment_count` = #{commentCount}
+
+        WHERE `index` = #{index}
+
+    </update>
+
+    <update id="updateBpArticle" parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+
+        UPDATE `bbq_bbs`.`bp_articles`
+        SET
+            `bp_board_id` =#{bpBoardId},
+            `name` = #{name},
+            `email`  = #{email},
+            `contact`  = #{contact},
+            `company`  = #{company},
+            `request_date`  = #{requestDate},
+            `product_info`  = #{productInfo},
+            `request_price`  = #{requestPrice},
+            `pay`  = #{pay},
+            `request_evidence`  = #{requestEvidence},
+            `reply_sms`  = #{replySms},
+            `reply_email`  = #{replyEmail},
+            `title`  = #{title},
+            `content`  = #{content},
+            `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)),
+            `comment_count`= #{commentCount}
+        WHERE `index` = #{index}
+
+    </update>
+
+
+    <update id="updateNoticeIsNew" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+        UPDATE `bbq_bbs`.`notice`
+
+        SET `new_flag` = 0
+
+        WHERE  `expiration_date` &lt; NOW()
+
+
+
+
+    </update>
+
+    <update id="updateAdminComment" parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        UPDATE `bbq_bbs`.`admin_comments`
+
+        SET `content` = #{content},
+            `modified_on` = #{modifiedOn}
+
+        WHERE  `index`= #{index}
+        LIMIT 1;
+    </update>
+
+    <update id="updatePiComment" parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        UPDATE `bbq_bbs`.`pi_comments`
+
+        SET `content` = #{content},
+            `modified_on` = #{modifiedOn}
+
+        WHERE  `index`= #{index}
+        LIMIT 1;
+    </update>
+
+
+    <delete id="deleteNoticeByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`notice`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
+    <delete id="deleteBpArticleByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`bp_articles`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
+    <delete id="deleteAdminCommentByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
+    <delete id="deletePiCommentByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`pi_comments`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
+
+</mapper>

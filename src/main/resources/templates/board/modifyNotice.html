@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공지사항 수정</title>
+
+
+  <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+  <!--  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeNotice.css}">-->
+  <!--  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeBulkPurchase.css}">-->
+  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeNotice.css}">
+
+  <script defer th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
+  <script defer th:src="@{/bbs/resources/scripts/modifyNotice.js}"></script>
+
+  <script th:if="${result.equals('NO_SUCH_ARTICLE')}">
+    alert('존재하지 않는 게시판입니다.');
+
+    window.location.href='/board/' ;
+  </script>
+  <script th:if="${result.equals('NOT_ALLOWED')}">
+    alert('수정할 권한이 없습니다.');
+
+    window.location.href='/board/' ;
+
+  </script>
+  <script th:if="${result.equals('NOT_SIGNED')}">
+    alert('로그인이 되었는지 확인후 다시 시도해 주세요.');
+
+    if (window.history.length>1){
+      window.location.href='../member/login'
+
+    }else {
+      window.close();
+
+    }
+  </script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+
+<main class="cs-center">
+  <input hidden th:value="${bid}" id="bidValue">
+  <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+  <div class="content" th:if="${session.user!=null && bid!='bp'}">
+
+    <div class="title-container">
+      <h1 th:text="${bid.equals('notice')?'공지사항 수정':'상품 글 수정'}">공지사항 수정</h1>
+    </div>
+
+    <form class="write-form" id="form">
+
+      <table class="content-table" id="table">
+        <tbody>
+        <tr class="class-row">
+          <th>분류</th>
+          <td>
+
+            <label class="label">
+              <b th:text="${!bid.equals('notice')?'상품':''}"></b>
+
+              <span hidden>보드아이디</span>
+              <input hidden id="bidLoad" th:value="${notice.getBoardId()}">
+              <select name="bid">
+                <option selected value="notice">
+                  공지
+                </option>
+
+                <option value="event">
+                  이벤트
+                </option>
+                <option value="urgent">
+                  긴급공지
+                </option>
+              </select>
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>제목</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>제목</span>
+              <input class="--object-input input" maxlength="100" name="title" placeholder="제목을 입력해주세요"
+                     type="text" th:value="${notice.getTitle()}">
+              <input hidden name="bidValue" value="notice">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="text-box-row">
+          <th>내용</th>
+          <td>
+            <label class="label">
+              <span hidden>내용</span>
+              <textarea class="--object-input input" maxlength="10000" name="content"
+                        placeholder="내용을 입력해주세요" th:text="${notice.getContent()}"></textarea>
+
+            </label>
+          </td>
+        </tr>
+
+        <tr class="button-row">
+          <th></th>
+          <td>
+            <label>
+              <input class="before" name="back" value="돌아가기" type="button">
+            </label>
+            <span class="spring"></span>
+            <label>
+              <input class="submit" name="submit" value="수정하기" type="submit">
+
+            </label>
+
+
+
+          </td>
+
+
+        </tr>
+
+
+        <input th:value="${notice.getIndex()}" id="index" hidden>
+        </tbody>
+      </table>
+    </form>
+
+
+
+
+
+
+
+
+  </div>
+  <div class="content content-bp" th:if="${session.user!=null && bid=='bp'}">
+
+    <div class="title-container">
+      <h1>대량구매</h1>
+    </div>
+
+    <form class="write-form" name="form">
+
+      <table class="content-table" >
+        <tbody>
+        <tr class="title-row">
+          <th>문의등록자</th>
+          <td>
+
+
+            <label class="label">
+              <!--                            <input type="text" placeholder="제목, 내용" th:value="${#request.getParameter('keyword')}" name="keyword">-->
+              <span hidden>문의등록자</span>
+              <input class="--object-input input" maxlength="100" name="id" readonly
+                     type="text" th:value="${BpArticle.getId()}">
+              <input hidden name="bidValue" value="bp">
+            </label>
+          </td>
+        </tr>
+        <tr class="class-row">
+          <th>분류</th>
+          <td>
+
+
+            <label class="label">
+              <input hidden id="bpIndex" th:value="${BpArticle.getIndex()}">
+              <input hidden id="bbidLoad" th:value="${BpArticle.getBpBoardId()}">
+
+              <span hidden>보드아이디</span>
+              <select name="bbid" th:value="${BpArticle.getBpBoardId()}">
+                <option  value="no">
+                  -분류선택-
+                </option>
+                <option  value="1">
+                  대량구매 문의
+                </option>
+
+                <option value="2">
+                  제휴 문의
+                </option>
+                <option value="3">
+                  견적 문의
+                </option>
+              </select>
+
+            </label>
+          </td>
+        </tr>
+
+        <tr class="title-row">
+          <th>담당자명</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>제목</span>
+              <input class="--object-input input" maxlength="100" name="name"
+                     type="text" th:value="${BpArticle.getName()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>담당자이메일</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>이메일</span>
+              <input class="--object-input input" maxlength="30" name="email"
+                     type="email" th:value="${BpArticle.getEmail()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>담당자연락처</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>담당자연락처</span>
+              <input class="--object-input input" maxlength="20" name="contact" placeholder="' - ' 없이 입력해주세요"
+                     type="text" th:value="${BpArticle.getContact()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>회사명</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>회사명</span>
+              <input class="--object-input input" maxlength="20" name="company"
+                     type="text" th:value="${BpArticle.getCompany()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>배송요청일</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>배송요청일</span>
+              <input class="--object-input input" name="requestDate"
+                     type="date" th:value="${BpArticle.getRequestDate()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row request-row">
+          <th>상품정보</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>상품정보</span>
+              <input  maxlength="100" name="productInfo" placeholder="문의하시는 상품을 기술해주세요."
+                      type="text" th:value="${BpArticle.getProductInfo()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>요청금액</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>요청금액</span>
+              <input class="--object-input input" maxlength="30" name="requestPrice"
+                     type="number" th:value="${BpArticle.requestPrice}">
+              <span>원</span>
+            </label>
+
+          </td>
+        </tr>
+        <tr class="title-row">
+          <th>결제수단</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>제목</span>
+              <input class="--object-input input" maxlength="100" name="pay" placeholder="결제수단을 입력해주세요."
+                     type="text" th:value="${BpArticle.getPay()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row request-row">
+          <th>필요증빙자료</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>제목</span>
+              <input class="--object-input input" maxlength="20" name="requestEvidence" placeholder="필요하신 증빙자료를 입력해주세요. ex) 현금영수증, 세금계산서, 필요없음"
+                     type="text" th:value="${BpArticle.getRequestEvidence()}">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="reply">
+          <th>답변받기</th>
+          <td>
+
+
+            <label class="label">
+
+              <span> SMS</span>
+              <input class="--object-input input"  name="replySms" id="replySms" type="checkbox">
+            </label>
+            <label class="label">
+
+              <span> email</span>
+
+              <input class="--object-input input"  name="replyEmail" id="replyEmail" type="checkbox">
+
+            </label>
+          </td>
+        </tr>
+        <tr class="title-row request-row">
+          <th>제목</th>
+          <td>
+
+
+            <label class="label">
+
+              <span hidden>제목</span>
+              <input class="--object-input input" maxlength="100" name="title"
+                     type="text" th:value="${BpArticle.getTitle()}">
+
+            </label>
+          </td>
+        </tr>
+
+
+
+        <tr class="text-box-row">
+          <th>내용</th>
+          <td>
+            <label class="label">
+              <span hidden>내용</span>
+              <textarea class="--object-input input" maxlength="10000" name="content"
+                        placeholder="내용을 입력해주세요" th:text="${BpArticle.getContent()}"></textarea>
+
+            </label>
+          </td>
+        </tr>
+
+        <tr class="button-row">
+          <th></th>
+          <td>
+            <label>
+              <input class="before" name="back" value="돌아가기" type="button">
+            </label>
+            <span class="spring"></span>
+            <label>
+              <input class="submit" name="submit" value="작성하기" type="button">
+
+            </label>
+
+
+
+          </td>
+
+
+        </tr>
+
+
+
+        </tbody>
+      </table>
+    </form>
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+</main>
+
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+
+</body>
+</html>

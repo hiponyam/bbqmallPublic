@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiponya.bbqmall.mappers.IHomeMapper">
+
+    <select id="selectProductReview" resultType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+
+        SELECT *
+        FROM `bbq_bbs`.`notice`
+        WHERE `board_id` = 'pr'
+        ORDER BY `index`
+        LIMIT 12
+
+
+    </select>
+
+    <select id="selectRecommendedProduct" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+
+        SELECT `product_index` AS `productIndex`,
+               `detail_index` AS `detailIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `content` AS `content`,
+               `view` AS `view`,
+               `created_on` AS `createdOn`,
+               `modified_on` AS `modifiedOn`,
+               `amount` AS `amount`,
+               `on_sale` AS onSale,
+               `sale_quantity` AS `saleQuantity`
+
+        FROM `bbqmall`.`products`
+        WHERE `on_sale`=1
+        ORDER BY `product_index`
+
+        LIMIT 24
+    </select>
+
+    <select id="selectProductImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`product_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+    <select id="selectDetailImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`detail_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+</mapper>

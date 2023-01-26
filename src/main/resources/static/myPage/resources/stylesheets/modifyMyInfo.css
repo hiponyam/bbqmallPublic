@@ -1,0 +1,315 @@
+body>main{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-family: inherit;
+
+    width:80rem;
+}
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 4.0625rem;
+    padding-bottom: 6.25rem;
+
+}
+
+body> main> .content>.title-container{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.125rem;
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.6);
+    padding-bottom: 2rem;
+
+}
+body> main> .content>form > table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 3rem;
+}
+body> main> .content>form > table>thead{
+    padding-top: 10rem;
+    /*display: none;*/
+}
+body> main> .content > form > table>thead>tr>th>h1{
+    text-shadow: 0 0  0.5rem #767676 ;
+
+}
+body> main> .content>form > table .password-check-row{
+    /*display: none;*/
+}
+
+
+
+body> main> .content>form > table>tbody{
+    /*display: flex;*/
+    width: 100%;
+    /*display: block;*/
+    /*flex-direction: column;*/
+    /*align-items: flex-start;*/
+    border-collapse: collapse;
+}
+/*body> main> .content>form > table>tbody>tr,*/
+/*body> main> .content>form > table>tbody>td{*/
+
+/*    width: 100%;*/
+/*}*/
+
+
+body> main> .content>form > table>tbody>.password-check-row{
+    width: 17rem;
+    padding-top: 2rem;
+    padding-bottom: 10rem;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+
+}
+body> main> .content>form > table>tbody>.password-check-row{
+    /*display: flex;*/
+}
+
+
+body> main> .content>form > table>tbody>.password-check-row>td{
+
+    display: flex;
+}
+body> main> .content>form > table>tbody>.password-check-row>td>input{
+    padding: 0.5rem 2rem;
+    border-radius: 0.2rem;
+    border: none;
+    background-color: #E31134;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+
+}
+body> main> .content>form > table>tbody>.password-check-row>td>input:hover{
+    background-color: rgba(0,0,0,0.5);
+
+}
+
+
+body> main> .content>form > table>tbody>.password-check-row>td>label>input{
+
+    padding: 0.5rem;
+    margin-right: 0.2rem;
+    border-radius: 0.2rem;
+    border: rgba(0,0,0,0.4) solid 0.0625rem;
+
+}
+body> main> .content>form > table>tbody>.password-check-row>td>label>input:focus{
+    outline: none;
+}
+
+/*수정 페이지*/
+
+body> main> .content>form > table>tbody>.modify-row.title-row>td>h1{
+    font-size: 2rem;
+    font-weight: 100;
+    padding: 0.5rem 0;
+}
+
+
+
+body> main> .content>form > table>tbody>.modify-row{
+    width: 100%;
+
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+    display: none;
+}
+
+body> main> .content>form > table>tbody>.modify-row>th{
+    padding: 1rem 2rem;
+    width: 5rem;
+    background-color: rgba(0,0,0,0.05);
+    font-weight: 450;
+    color: rgba(0,0,0,0.8);
+    display: inline-block;
+    white-space: nowrap;
+
+
+}
+
+
+body> main> .content>form > table>tbody>.modify-row>td{
+    padding: 0.5rem;
+    /*width: 80%;*/
+    display:inline-block;
+
+}
+
+
+body> main> .content>form > table>tbody>.modify-row>td>label>input{
+    padding: 0.5rem;
+    border: rgba(0,0,0,0.3) solid 0.0625rem;
+    border-radius: 0.15rem;
+    font-family: inherit;
+}
+body> main> .content>form > table>tbody>.modify-row.address-row{
+    display: none;
+    flex-direction: row;
+}
+
+
+body> main> .content>form > table>tbody>.modify-row.address-row>td{
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+
+}
+body> main> .content>form > table>tbody>.modify-row>td>label{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+body> main> .content>form > table>tbody>.modify-row.address-row>td>label:first-of-type>input{
+    width: 20%;
+    margin-right:0.25rem;
+
+}
+
+
+body> main> .content>form > table>tbody>.password-row>th:nth-of-type(2),
+body> main> .content>form > table>tbody>.password-row>td:nth-of-type(2)
+{
+    display: none;
+}
+body> main> .content>form > table>tbody>.password-row.visible>td>label>.password-button,
+body> main> .content>form > table>tbody>.password-row.visible>th:nth-of-type(2),
+body> main> .content>form > table>tbody>.password-row.visible>td:nth-of-type(2)
+{
+    display: inline-block;
+}
+body> main> .content>form > table>tbody>.password-row.visible>td>label>#passwordButton{
+    display: none;
+}
+
+
+
+body> main> .content>form > table>tbody>.modify-row>td>label>.password-button{
+    margin-left: 0.25rem;
+}
+
+
+body> main> .content>form > table>tbody>.modify-row.address-row>td>label>input{
+    width: 100%;
+
+}
+body> main> .content>form > table>tbody>.modify-row.address-row>td>label:nth-of-type(2)>input{
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+body> main> .content>form >input[type="submit"]{
+    padding: 0.5rem 2rem;
+    border-radius: 0.2rem;
+    border: none;
+    background-color: #E31134;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 1.5rem;
+
+
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+/*주소 입력창*/
+body > main > .content > form> table > tbody>tr>td>.panel.address{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,70%);
+    position: fixed;
+    display: none;
+    z-index: 10;
+}
+body > main > .content > form> table > tbody>tr>td>.panel.address.visible{
+
+    display: block;
+}
+
+
+body > main > .content > form> table > tbody>tr>td>.panel.address>.dialog{
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    max-width: 27.5rem;
+    max-height: 30rem;
+    background-color: rgb(255,255,255);
+    position: absolute;
+    transform: translate(-50% ,-50%);
+}
+body #MSideBarM{
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
+}
+@media screen and (max-width : 87.5rem) {
+
+
+    body > main {
+
+        width: 100%;
+
+    }
+
+    body>main>article{
+        font-size: 1.5rem;
+        padding:0 1.625rem  0.5rem 0;
+    }
+
+
+    body > main > .content > form> table > tbody>tr>td>.panel.address>.dialog{
+        top: 0;
+        left: 0;
+
+        transform: translate(40% ,50%);
+    }
+
+    body> main> .content>form > table>tbody>.modify-row.address-row>td{
+
+        width: 70%;
+
+    }
+
+    body> main> .content>form > table>tbody>.modify-row>th{
+        padding: 0 ;
+
+
+
+
+    }
+
+
+}
+@media screen and (max-width : 53.75rem) {
+
+
+    body > main > article {
+        padding: 0 1rem 0.5rem 0;
+    }
+
+    body > main > article > ul > li > a {
+        padding: 0.375rem 0 0.4375rem 0;
+        width: 6.75rem;
+    }
+
+
+}

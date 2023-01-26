@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/recover.css}">
+    <script defer th:src="@{/member/resources/scripts/recover.js}"></script>
+    <!--    <script defer th:src="@{/member/resources/scripts/login.js}"></script>-->
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="main">
+    <div class="content " id="content">
+        <form class="form recover-mode-id " id="form">
+            <h1 class="title">아이디/비밀번호 찾기</h1>
+
+            <table>
+                <tbody>
+                <tr class="recover-mode-row">
+                    <td>
+
+                        <label>
+                            <input class="recover-id" name="recoverId" value="아이디 찾기" type="button">
+                        </label>
+
+                        <label>
+                            <input class="recover-password" name="recoverPassword" value="비밀번호찾기" type="button">
+                        </label>
+                    </td>
+
+                </tr>
+
+                <tr class="icon-row visible">
+                    <td>
+                        <div class="bar-container">
+                            <div class="bar-icon">
+                                <span>/////////////////////</span>
+                            </div>
+                            <span class="row-title">등록된 정보로 아이디 찾기</span>
+                            <div class="bar-icon">
+                                <span>/////////////////////</span>
+                            </div>
+                        </div>
+                        <span class="row-title2"> 회원가입시 등록한 정보로 찾을 수 있습니다.</span>
+                        <div class="icon-container"><i class="fa-solid fa-envelope icon"></i>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr class="name-row data-row">
+                    <th>
+                        <span>이름</span></th>
+
+                    <td>
+                        <label> <input type="text" name="name" autofocus maxlength="10"></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="id-row data-row">
+                    <th><span>아이디</span></th>
+
+                    <td>
+                        <label> <input type="text" name="id" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="email-row data-row">
+                    <th><span>이메일</span></th>
+
+                    <td>
+                        <label> <input type="email" name="email" maxlength="30"></label>
+
+                    </td>
+
+
+                </tr>
+
+
+                <tr class="result-row data-row">
+
+                    <td>
+
+                        <span class="no-select">고객님의 아이디는&nbsp;&nbsp;</span>
+                        <span rel="result-id">null</span>
+                        <span class="no-select">&nbsp;&nbsp;입니다.</span>
+                    </td>
+
+
+                </tr>
+
+
+
+                <tr class="user-id data-row">
+                    <th><span>아이디</span></th>
+
+                    <td>
+                        <label> <input type="text" name="userId" maxlength="20" disabled></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="password-row data-row">
+                    <th><span>비밀번호</span></th>
+
+                    <td>
+                        <label> <input type="password" name="password" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="password-check-row data-row">
+                    <th><span>비밀번호 확인</span></th>
+
+                    <td>
+                        <label> <input type="password" name="passwordCheck" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+
+
+                </tbody>
+
+                <tfoot>
+                <tr class="next-button-row visible">
+                    <td>
+                        <label>
+                            <input type="button" value="이메일 전송" name="next">
+                        </label>
+                    </td>
+                </tr>
+
+                <tr class="result-button-row">
+                    <td>
+                        <label>
+                            <input class="login" type="button" value="로그인" name="login">
+                        </label>
+
+
+                        <label>
+                            <input  class= " gray-button" type="button" value="회원가입" name="register">
+                        </label>
+                    </td>
+                </tr>
+
+
+
+                </tfoot>
+
+            </table>
+
+            <label>
+                <input hidden name="code">
+                <input hidden name="salt">
+                <input hidden name="recoverMode" th:value="${find}">
+            </label>
+
+        </form>
+
+
+    </div>
+</main>
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+
+</html>

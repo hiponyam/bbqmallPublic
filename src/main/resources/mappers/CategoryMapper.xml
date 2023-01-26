@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiponya.bbqmall.mappers.ICategoryMapper">
+    <!--    <select id="selectCategoryIndexByDetailIndex" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">-->
+    <!--        select `index` as `index`, `title` as `title`-->
+    <!--        from bbqmall.category-->
+    <!--        <if test="cid != 0">where `detail_index` = #{cid}</if>-->
+    <!--    </select>-->
+
+    <select id="selectUserById" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        select `email`             as `email`,
+               `id`                as `id`,
+               `name`              as `name`,
+               `contact`           as `contact`,
+               `address_postal`    as `addressPostal`,
+               `address_primary`   as `addressPrimary`,
+               `address_secondary` as `addressSecondary`
+        from bbqmall.users
+        where binary `id` = #{id}
+    </select>
+
+    <select id="selectCategories" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">
+        select `index` as `index`,
+               `title` as `title`
+        from bbqmall.category
+    </select>
+
+    <select id="selectCategories2" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">
+        select `index` as `index`,
+               `title` as `title`
+        from bbqmall.category
+        where binary `index` = #{index};
+    </select>
+
+    <select id="selectProducts" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+        select `product_index` as `productIndex`,
+        `detail_index` as `detailIndex`,
+        `product_name` as `productName`,
+        `price` as `price`,
+        `content` as `content`,
+        `view` as `view`,
+        `created_on` as `createdOn`,
+        `modified_on` as `modifiedOn`,
+        `amount` as `amount`,
+        `on_sale` as `onSale`,
+        `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        left join `bbqmall`.`detail_menu` on products.detail_index = `detail_menu`.`index`
+        left join bbqmall.menus as menu on detail_menu.menu_index = menu.`index`
+
+
+        <if test="cid != 0">where menu.`index` = #{cid}</if>
+        <if test="sid == 1">order by `view` desc</if>
+        <if test="sid == 2">order by `createdOn` desc</if>
+        <if test="sid == 3">order by `price` desc</if>
+        <if test="sid == 4">order by `price` asc</if>
+        <if test="sid == 5">order by `view` desc</if>
+        <if test="sid == 6">order by `view` asc</if>
+    </select>
+
+    <select id="selectEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index`  as `detailIndex`,
+               `product_name`  as `productName`,
+               `price`         as `price`,
+               `content`       as `content`,
+               `view`          as `view`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`,
+               `amount`        as `amount`,
+               `on_sale`       as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+                 limit 8;
+    </select>
+
+    <select id="selectSecondEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index`  as `detailIndex`,
+               `product_name`  as `productName`,
+               `price`         as `price`,
+               `content`       as `content`,
+               `view`          as `view`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`,
+               `amount`        as `amount`,
+               `on_sale`       as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+                 limit 8, 8;
+    </select>
+
+    <select id="selectThirdEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index`  as `detailIndex`,
+               `product_name`  as `productName`,
+               `price`         as `price`,
+               `content`       as `content`,
+               `view`          as `view`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`,
+               `amount`        as `amount`,
+               `on_sale`       as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+                 limit 16, 8;
+    </select>
+
+    <select id="selectSort" resultType="com.hiponya.bbqmall.entities.product.SortEntity">
+        select `index` as `index`,
+               `sort`  as `sort`
+        from bbqmall.sort
+        where `index` = #{sid}
+    </select>
+
+    <select id="selectSorts" resultType="com.hiponya.bbqmall.entities.product.SortEntity">
+        select `index` as `index`, `sort` as `sort`
+        from bbqmall.sort
+    </select>
+
+    <select id="selectProductsSortBySortIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+        `detail_index` as `detailIndex`,
+        `product_name` as `productName`,
+        `price` as `price`,
+        `content` as `content`,
+        `view` as `view`,
+        `created_on` as `createdOn`,
+        `modified_on` as `modifiedOn`,
+        `amount` as `amount`,
+        `on_sale` as `onSale`,
+        `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        <if test="sid == 1">order by `view` desc</if>
+        <if test="sid == 2">order by `createdOn` desc</if>
+        <if test="sid == 3">order by `price` asc</if>
+        <if test="sid == 4">order by `price` desc</if>
+        <if test="sid == 5">order by `view` desc</if>
+        <if test="sid == 6">order by `view` asc</if>
+    </select>
+
+    <select id="selectWishlist" resultType="com.hiponya.bbqmall.entities.product.WishlistEntity">
+        select `index`                    as `index`,
+               `id`                       as `id`,
+               `wishlist`.`product_index` as `productIndex`,
+               `quantity`                 as `quantity`,
+               `product`.`price`          as `price`,
+               `product`.`product_name`   as `productName`,
+               `product`.`sale_quantity`  as `saleQuantity`
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where `index` = #{index}
+    </select>
+
+    <select id="selectWishlists" resultType="com.hiponya.bbqmall.vos.product.WishlistVo">
+        select `index`                    as `index`,
+               `id`                       as `id`,
+               `wishlist`.`product_index` as `productIndex`,
+               `quantity`                 as `quantity`,
+               `product`.`price`          as `price`,
+               `product`.`product_name`   as `productName`,
+               `product`.`sale_quantity`  as `saleQuantity`
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where binary `id` = #{id}
+    </select>
+
+    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index`  as `detailIndex`,
+               `product_name`  as `productName`,
+               `price`         as `price`,
+               `content`       as `content`,
+               `view`          as `view`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`,
+               `amount`        as `amount`,
+               `on_sale`       as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        where binary product_index = #{productIndex}
+        order by saleQuantity desc;
+    </select>
+
+    <select id="selectProductByIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+        select `product_index` as `productIndex`,
+               `detail_index`  as `detailIndex`,
+               `product_name`  as `productName`,
+               `price`         as `price`,
+               `content`       as `content`,
+               `view`          as `view`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`,
+               `amount`        as `amount`,
+               `on_sale`       as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+
+        where binary product_index = #{pid}
+    </select>
+
+    <select id="selectCartByIndex" resultType="com.hiponya.bbqmall.entities.product.CartEntity">
+        select `index`         as `index`,
+               `id`            as `id`,
+               `product_index` as `productIndex`,
+               `price`         as `price`,
+               `amount`        as `amount`,
+               `created_on`    as `createdOn`,
+               `modified_on`   as `modifiedOn`
+        from bbqmall.cart
+        where `index` = #{cid}
+    </select>
+
+    <select id="selectWishlistSumPriceByUserId" resultType="int">
+        select sum(`price` * `quantity`)
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where id = #{id}
+    </select>
+
+    <select id="selectWishlistSumSalePriceByUserId" resultType="int">
+        select sum(`price` * `quantity` / sale_quantity)
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where id = #{id}
+    </select>
+
+    <select id="selectWishlistSumQuantityByUserId" resultType="int">
+        select sum(`quantity`)
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where id = #{id}
+    </select>
+
+    <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+        SELECT `product_index` AS `productIndex`,
+        `detail_index` AS `detailIndex`,
+        `menu`.`index`AS `menuIndex`,
+        `product_name` AS `productName`,
+        `price` AS `price`,
+        `content` AS `content`,
+        `view` AS `view`,
+        `created_on` AS `createdOn`,
+        `modified_on` AS `modifiedOn`,
+        `amount` AS `amount`,
+        `on_sale` AS onSale,
+        `sale_quantity` AS `saleQuantity`
+        FROM `bbqmall`.`products`
+        LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
+        LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
+
+        <if test='cid!=0'>
+            WHERE `menu`.`index` = #{cid}
+        </if>
+        <if test="sid == 1 and sid == null">order by `products`.`view` desc</if>
+        <if test="sid == 2 and sid != null">order by `products`.`created_on` desc</if>
+        <if test="sid == 3 and sid != null">order by `products`.`price` desc</if>
+        <if test="sid == 4 and sid != null">order by `products`.`price` asc</if>
+        <if test="sid == 5 and sid != null">order by `products`.`view` desc</if>
+        <if test="sid == 6 and sid != null">order by `products`.`view` asc</if>
+
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
+    <select id="selectProductsByKeyword" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+        SELECT `product`.`product_index` AS `productIndex`,
+               `product`.`detail_index`  AS `detailIndex`,
+               `menu`.`index`            AS `menuIndex`,
+               `product`.`product_name`  AS `productName`,
+               `product`.`price`         AS `price`,
+               `product`.`content`       AS `content`,
+               `product`.`view`          AS `view`,
+               `product`.`created_on`    AS `createdOn`,
+               `product`.`modified_on`   AS `modifiedOn`,
+               `product`.`amount`        AS `amount`,
+               `product`.`on_sale`       AS onSale,
+               `product`.`sale_quantity` AS `saleQuantity`
+        FROM `bbqmall`.`products` AS product
+                 LEFT JOIN `bbqmall`.`detail_menu` on `product`.`detail_index` = `detail_menu`.`index`
+                 LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
+
+        WHERE (REPLACE(`product_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%'))
+        ORDER BY `product`.`product_index` DESC
+            LIMIT #{limit}
+        OFFSET #{offset}
+
+
+    </select>
+
+
+    <select id="selectCategoryProductCountById" resultType="int">
+
+        SELECT COUNT(0)
+
+        FROM `bbqmall`.`products` AS `product`
+        LEFT JOIN `bbqmall`.`detail_menu` on `product`.`detail_index` = `detail_menu`.`index`
+        LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
+
+        <if test="cid!=null and cid !=0">
+            WHERE `menu`.`index` = #{cid};
+        </if>
+
+
+    </select>
+    <select id="selectSearchProductsCountByKeyword" resultType="int">
+
+        SELECT COUNT(0)
+
+        FROM `bbqmall`.`products`
+        WHERE (REPLACE(`product_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%'))
+
+
+    </select>
+
+
+    <select id="selectProductImagesByProductIndexExceptData"
+            resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index`         AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`product_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+    <select id="selectDetailImagesByProductIndexExceptData"
+            resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`         AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`detail_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+
+    <select id="selectProductImageByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index`         AS `index`,
+               `product_index` AS `productIndex`,
+               `data`          AS `data`,
+               `type`          AS `type`
+        FROM bbqmall.`product_images`
+        WHERE `index` = #{index}
+            LIMIT 1;
+
+    </select>
+    <select id="selectDetailImageByIndex" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`         AS `index`,
+               `product_index` AS `productIndex`,
+               `data`          AS `data`,
+               `type`          AS `type`
+        FROM bbqmall.`detail_images`
+        WHERE `index` = #{index}
+            LIMIT 1;
+
+    </select>
+
+
+    <insert id="insertWishlistByIndex" parameterType="com.hiponya.bbqmall.entities.product.WishlistEntity"
+            useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.wishlist (`id`, `product_index`, `quantity`)
+        values (#{id}, #{productIndex}, #{quantity})
+    </insert>
+
+    <insert id="insertWishlistOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity"
+            useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.order (`id`, `name`, `contact`, `address_postal`, `address_primary`, `address_secondary`,
+                                   `product_index`, `product_name`, `price`, `order_amount`)
+        values (#{id}, #{name}, #{contact}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
+                #{productIndex}, #{productName}, #{price}, #{orderAmount})
+    </insert>
+
+    <insert id="insertOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity"
+            useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.order (`id`, `name`, `contact`, `address_postal`, `address_primary`, `address_secondary`,
+                                   `product_index`, `product_name`, `price`, `order_amount`)
+        values (#{id}, #{name}, #{contact}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
+                #{productIndex}, #{productName}, #{price}, #{orderAmount})
+    </insert>
+
+    <delete id="deleteWishlistByIndex">
+        delete
+        from bbqmall.wishlist
+        where `index` = #{index}
+            limit 1;
+    </delete>
+
+
+    <!--    <insert id="insertArticle" parameterType="com.khj.studymemberbbs.entities.bbs.ArticleEntity"-->
+    <!--            useGeneratedKeys="true" keyColumn="index" keyProperty="index">-->
+    <!--        insert into study_bbs.articles (`user_email`, `board_id`, `title`, `content`, `view`, `written_on`,-->
+    <!--                                        `modified_on`)-->
+    <!--        values (#{userEmail}, #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)),-->
+    <!--                IFNULL(#{modifiedOn}, DEFAULT(modified_on)))-->
+    <!--    </insert>-->
+
+    <!--    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">-->
+    <!--        select `product_index` as `productIndex`,-->
+    <!--               `detail_index` as `detailIndex`,-->
+    <!--               `product_name` as `productName`,-->
+    <!--               `price` as `price`,-->
+    <!--               `content` as `content`,-->
+    <!--               `view` as `view`,-->
+    <!--               `created_on` as `createdOn`,-->
+    <!--               `modified_on` as `modifiedOn`,-->
+    <!--               `amount` as `amount`,-->
+    <!--               `onsale` as `onsale`,-->
+    <!--               `sale_quantity` as `saleQuantity`-->
+    <!--        from `bbqmall`.`products`-->
+    <!--        where binary `product_index` = #{productIndex}-->
+    <!--        order by saleQuantity desc-->
+    <!--    </select>-->
+
+
+</mapper>
